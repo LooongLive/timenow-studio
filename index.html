@@ -680,6 +680,12 @@ input[type="range"] {
   width: min(420px, calc(100vw - 34px));
   max-height: min(246px, 42vh);
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable;
+  touch-action: pan-y;
   transform: translateX(50%);
   z-index: 30;
 }
@@ -773,6 +779,12 @@ input[type="range"] {
   width: min(420px, calc(100vw - 34px));
   max-height: min(246px, 42vh);
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable;
+  touch-action: pan-y;
   z-index: 30;
 }
 
@@ -821,6 +833,7 @@ input[type="range"] {
 .world-menu-group {
   display: grid;
   gap: 6px;
+  min-height: max-content;
 }
 
 .world-menu-group > span {
@@ -1202,10 +1215,13 @@ input[type="range"] {
     { country: "新加坡", city: "新加坡", zone: "Asia/Singapore" },
     { country: "南非", city: "比勒陀利亚", zone: "Africa/Johannesburg" },
     { country: "墨西哥", city: "墨西哥城", zone: "America/Mexico_City" },
+    { country: "泰国", city: "曼谷", zone: "Asia/Bangkok" },
+    { country: "意大利", city: "罗马", zone: "Europe/Rome" },
   ];
   const capitalContinents = {
     "Asia/Shanghai": "asia", "Asia/Tokyo": "asia", "Asia/Seoul": "asia", "Asia/Kolkata": "asia", "Asia/Dubai": "asia", "Asia/Singapore": "asia",
-    "Europe/London": "europe", "Europe/Paris": "europe", "Europe/Berlin": "europe", "Europe/Moscow": "europe",
+    "Asia/Bangkok": "asia",
+    "Europe/London": "europe", "Europe/Paris": "europe", "Europe/Berlin": "europe", "Europe/Moscow": "europe", "Europe/Rome": "europe",
     "America/New_York": "northAmerica", "America/Toronto": "northAmerica", "America/Mexico_City": "northAmerica", "America/Sao_Paulo": "southAmerica",
     "Australia/Sydney": "oceania", "Africa/Johannesburg": "africa",
   };

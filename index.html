@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="zh-CN">
 <head>
@@ -7,85 +6,1564 @@
   <title>TimeNow Studio</title>
   <meta name="description" content="A modern glass world clock and countdown page.">
   <style>
-    :root{--font-system:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
-    *{box-sizing:border-box}html,body{height:100%;overflow:hidden}body{margin:0;background:#080a10;color:#f8fbff;font-family:var(--font-system)}button,input{font:inherit}
-    .app{--bg-a:#090b15;--bg-b:#10243a;--bg-c:#513a93;--accent:#86f7ff;--accent-2:#b7ff6d;--text:#f7fbff;--muted:rgba(247,251,255,.66);--glass:rgba(255,255,255,.12);--strong:rgba(255,255,255,.22);--line:rgba(255,255,255,.22);--shadow:rgba(0,0,0,.34);--scale:1;--display-font:var(--font-system);position:relative;display:grid;place-items:center;height:100vh;min-height:620px;overflow:hidden;background:radial-gradient(circle at 18% 12%,color-mix(in srgb,var(--accent) 35%,transparent),transparent 30%),radial-gradient(circle at 82% 20%,color-mix(in srgb,var(--accent-2) 26%,transparent),transparent 28%),linear-gradient(135deg,var(--bg-a),var(--bg-b) 48%,var(--bg-c));color:var(--text);font-family:var(--display-font)}
-    .app[data-theme=graphite]{--bg-a:#08090b;--bg-b:#242832;--bg-c:#5d6571;--accent:#d7e3f1;--accent-2:#8ea0b7}.app[data-theme=alpine]{--bg-a:#edf4ff;--bg-b:#cbd9ec;--bg-c:#91aecf;--accent:#0b63ce;--accent-2:#08a3a8;--text:#07131f;--muted:rgba(7,19,31,.62);--glass:rgba(255,255,255,.5);--strong:rgba(255,255,255,.66);--line:rgba(20,40,65,.16);--shadow:rgba(70,93,120,.25)}.app[data-theme=cobalt]{--bg-a:#020817;--bg-b:#073b83;--bg-c:#031f44;--accent:#39d5ff;--accent-2:#fff}.app[data-theme=ember]{--bg-a:#130906;--bg-b:#662817;--bg-c:#ad6d20;--accent:#ffd36f;--accent-2:#ff7a59}.app[data-theme=orchid]{--bg-a:#10051b;--bg-b:#4a145f;--bg-c:#0b2851;--accent:#f49cff;--accent-2:#78e0ff}.app[data-theme=mint]{--bg-a:#061615;--bg-b:#0f504c;--bg-c:#9bd6b0;--accent:#94ffe7;--accent-2:#eaffb7}.app[data-theme=mono]{--bg-a:#f7f7f4;--bg-b:#d9d9d4;--bg-c:#161616;--accent:#111;--accent-2:#707070;--text:#101010;--muted:rgba(16,16,16,.62);--glass:rgba(255,255,255,.58);--strong:rgba(255,255,255,.75);--line:rgba(0,0,0,.16)}.app[data-theme=midnight]{--bg-a:#02040a;--bg-b:#111827;--bg-c:#22304d;--accent:#7dd3fc;--accent-2:#c4b5fd}.app[data-theme=rose]{--bg-a:#1b0810;--bg-b:#5f2038;--bg-c:#d7a295;--accent:#ffd0dc;--accent-2:#ffb86c}.app[data-theme=solar]{--bg-a:#100d04;--bg-b:#4a3d07;--bg-c:#e9a92f;--accent:#fff4a8;--accent-2:#45ffd0}.app[data-theme=ocean]{--bg-a:#03131f;--bg-b:#064667;--bg-c:#1e8b98;--accent:#85f3ff;--accent-2:#b3f5c8}
-    .ambient{position:absolute;border-radius:999px;filter:blur(34px);opacity:.46;pointer-events:none}.a1{width:34vw;height:34vw;left:-10vw;top:-11vw;background:var(--accent)}.a2{width:30vw;height:30vw;right:-8vw;bottom:-10vw;background:var(--accent-2)}
-    .glass{border:1px solid var(--line);border-radius:8px;background:linear-gradient(140deg,var(--strong),transparent 120%),var(--glass);box-shadow:0 22px 70px var(--shadow);backdrop-filter:blur(28px) saturate(150%)}
-    .hourglass{position:fixed;z-index:10;top:clamp(14px,2.3vw,28px);right:clamp(14px,2.3vw,28px);display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.07);box-shadow:0 12px 34px rgba(0,0,0,.18);color:var(--text);font-size:1rem;opacity:.62;backdrop-filter:blur(20px) saturate(145%)}.hourglass:hover{opacity:.92;background:rgba(255,255,255,.14)}
-    .settings{position:fixed;z-index:9;top:clamp(66px,7.8vw,82px);right:clamp(14px,2.3vw,28px);display:grid;gap:13px;width:min(430px,calc(100vw - 28px));padding:15px}.settings label{display:grid;gap:8px;color:var(--muted);font-size:.76rem;font-weight:740}
-    input{min-width:0;height:36px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.12);color:var(--text);outline:none}input:not([type=range]){padding:0 11px}input[type=range]{width:100%;accent-color:var(--accent)}
-    .select{position:relative}.trigger{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:46px;border:1px solid var(--line);border-radius:8px;background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.08)),rgba(255,255,255,.12);color:var(--text);padding:8px 11px;text-align:left;backdrop-filter:blur(22px) saturate(150%)}.trigger span{display:grid;gap:2px;min-width:0}.trigger small{color:var(--muted);font-size:.66rem;font-weight:740}.trigger strong{overflow:hidden;font-size:.92rem;font-weight:760;text-overflow:ellipsis;white-space:nowrap}.trigger i{display:grid;place-items:center;width:24px;height:24px;border-radius:999px;background:color-mix(in srgb,var(--accent) 22%,transparent);color:var(--accent);font-style:normal}
-    .menu{position:absolute;z-index:20;top:calc(100% + 8px);left:0;right:0;display:grid;gap:6px;max-height:min(292px,42vh);overflow:auto;overscroll-behavior:contain;padding:8px;border:1px solid var(--line);border-radius:8px;background:linear-gradient(145deg,rgba(255,255,255,.28),rgba(255,255,255,.12)),color-mix(in srgb,var(--bg-b) 58%,transparent);box-shadow:0 22px 70px var(--shadow);backdrop-filter:blur(30px) saturate(170%);-webkit-overflow-scrolling:touch}.menu button{display:grid;gap:2px;min-height:42px;border:1px solid transparent;border-radius:8px;background:rgba(255,255,255,.08);color:var(--text);padding:8px 10px;text-align:left}.menu button:hover,.menu button.selected{border-color:color-mix(in srgb,var(--accent) 72%,var(--line));background:color-mix(in srgb,var(--accent) 24%,rgba(255,255,255,.14))}.menu span{overflow:hidden;font-size:.86rem;font-weight:760;text-overflow:ellipsis;white-space:nowrap}.menu small{overflow:hidden;color:var(--muted);font-size:.68rem;text-overflow:ellipsis;white-space:nowrap}
-    .theme-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.theme-grid button,.preset button,.start{min-height:32px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.1);color:var(--text);font-size:.72rem;font-weight:760}.theme-grid button.active,.theme-grid button:hover,.preset button:hover,.start:hover{border-color:color-mix(in srgb,var(--accent) 78%,var(--line));background:color-mix(in srgb,var(--accent) 25%,rgba(255,255,255,.12))}
-    .stage{position:relative;z-index:1;display:grid;justify-items:center;gap:calc(14px * var(--scale));width:min(94vw,1180px);padding:0 18px calc(86px + 24px * var(--scale));text-align:center}.now{display:inline-flex;align-items:center;justify-content:center;min-width:74px;height:38px;padding:0 18px;appearance:none;border:1px solid var(--line);border-radius:8px;background:linear-gradient(140deg,rgba(255,255,255,.2),rgba(255,255,255,.08)),rgba(255,255,255,.12);box-shadow:0 12px 28px rgba(0,0,0,.18);color:var(--text);font-size:clamp(.86rem,1.1vw,.98rem);font-weight:820;backdrop-filter:blur(20px) saturate(150%);cursor:pointer}.now:hover{border-color:color-mix(in srgb,var(--accent) 72%,var(--line));background:color-mix(in srgb,var(--accent) 22%,rgba(255,255,255,.13))}
-    .time-wrap{position:relative;display:inline-grid;max-width:100%}.main-time{display:block;max-width:100%;font-family:var(--display-font);font-size:calc(clamp(4.2rem,14vw,13.2rem) * var(--scale));font-weight:850;font-variant-numeric:tabular-nums;letter-spacing:0;line-height:.88;text-shadow:0 0 46px color-mix(in srgb,var(--accent) 35%,transparent);white-space:nowrap}.time-wrap.countdown .main-time{font-size:calc(clamp(3.7rem,12.5vw,11.5rem) * var(--scale))}.date{margin:0;color:var(--muted);font-size:calc(clamp(.95rem,1.6vw,1.28rem) * var(--scale))}
-    .panel{position:fixed;z-index:8;left:50%;bottom:clamp(92px,calc(10vh + 20px * var(--scale)),154px);display:grid;gap:12px;width:min(560px,calc(100vw - 28px));padding:15px;transform:translateX(-50%)}.panel .menu{top:auto;bottom:calc(100% + 8px)}.selected,.face{display:grid;justify-items:center;gap:4px;text-align:center}.selected span,.selected small,.face span,.face small{color:var(--muted);font-size:.78rem}.selected strong{font-size:clamp(1.25rem,2.2vw,1.9rem);font-weight:800}.selected time,.face time{color:var(--accent);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(2.2rem,6vw,4.4rem);font-variant-numeric:tabular-nums;font-weight:850;line-height:1}.face time{color:var(--accent-2);font-size:clamp(1.9rem,5vw,3.8rem)}
-    .count-panel{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.count-panel .select,.count-panel .preset,.count-panel .face{grid-column:1/-1}.preset{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.start{background:color-mix(in srgb,var(--accent-2) 24%,rgba(255,255,255,.12))}
-    .bottom{position:fixed;z-index:10;left:50%;bottom:clamp(16px,3vh,30px);display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:10px;width:min(480px,calc(100vw - 28px));transform:translateX(-50%)}.bottom button{height:52px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.13);box-shadow:0 18px 48px var(--shadow);color:var(--text);font-size:clamp(.95rem,1.5vw,1.08rem);font-weight:780;backdrop-filter:blur(24px) saturate(160%)}.bottom button:hover,.bottom button.active{border-color:color-mix(in srgb,var(--accent) 78%,var(--line));background:color-mix(in srgb,var(--accent) 24%,rgba(255,255,255,.14))}
-    .hidden{display:none!important}@media(max-width:720px){.app{min-height:680px}.hourglass{width:38px;height:38px;font-size:.92rem}.main-time{font-size:calc(clamp(3.35rem,17.5vw,6.8rem) * var(--scale))}.stage{padding-bottom:calc(104px + 22px * var(--scale))}.theme-grid,.preset{grid-template-columns:repeat(2,minmax(0,1fr))}.panel{bottom:clamp(88px,calc(8vh + 18px * var(--scale)),126px)}.count-panel{grid-template-columns:1fr}}
+:root {
+  --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  --background: #080a10;
+  --foreground: #f8fbff;
+}
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-system);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.time-app {
+  --bg-a: #090b15;
+  --bg-b: #10243a;
+  --bg-c: #513a93;
+  --accent: #86f7ff;
+  --accent-2: #b7ff6d;
+  --text: #f7fbff;
+  --muted: rgba(247, 251, 255, 0.66);
+  --glass: rgba(255, 255, 255, 0.12);
+  --glass-strong: rgba(255, 255, 255, 0.22);
+  --line: rgba(255, 255, 255, 0.22);
+  --shadow: rgba(0, 0, 0, 0.34);
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  min-height: 620px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 30%),
+    radial-gradient(circle at 82% 20%, color-mix(in srgb, var(--accent-2) 26%, transparent), transparent 28%),
+    linear-gradient(135deg, var(--bg-a), var(--bg-b) 48%, var(--bg-c));
+  color: var(--text);
+  font-family: var(--display-font);
+}
+
+.time-app[data-theme="graphite"] {
+  --bg-a: #08090b;
+  --bg-b: #242832;
+  --bg-c: #5d6571;
+  --accent: #d7e3f1;
+  --accent-2: #8ea0b7;
+}
+
+.time-app[data-theme="alpine"] {
+  --bg-a: #edf4ff;
+  --bg-b: #cbd9ec;
+  --bg-c: #91aecf;
+  --accent: #0b63ce;
+  --accent-2: #08a3a8;
+  --text: #07131f;
+  --muted: rgba(7, 19, 31, 0.62);
+  --glass: rgba(255, 255, 255, 0.5);
+  --glass-strong: rgba(255, 255, 255, 0.66);
+  --line: rgba(20, 40, 65, 0.16);
+  --shadow: rgba(70, 93, 120, 0.25);
+}
+
+.time-app[data-theme="cobalt"] {
+  --bg-a: #020817;
+  --bg-b: #073b83;
+  --bg-c: #031f44;
+  --accent: #39d5ff;
+  --accent-2: #ffffff;
+}
+
+.time-app[data-theme="ember"] {
+  --bg-a: #130906;
+  --bg-b: #662817;
+  --bg-c: #ad6d20;
+  --accent: #ffd36f;
+  --accent-2: #ff7a59;
+}
+
+.time-app[data-theme="orchid"] {
+  --bg-a: #10051b;
+  --bg-b: #4a145f;
+  --bg-c: #0b2851;
+  --accent: #f49cff;
+  --accent-2: #78e0ff;
+}
+
+.time-app[data-theme="mint"] {
+  --bg-a: #061615;
+  --bg-b: #0f504c;
+  --bg-c: #9bd6b0;
+  --accent: #94ffe7;
+  --accent-2: #eaffb7;
+}
+
+.time-app[data-theme="mono"] {
+  --bg-a: #f7f7f4;
+  --bg-b: #d9d9d4;
+  --bg-c: #161616;
+  --accent: #111111;
+  --accent-2: #707070;
+  --text: #101010;
+  --muted: rgba(16, 16, 16, 0.62);
+  --glass: rgba(255, 255, 255, 0.58);
+  --glass-strong: rgba(255, 255, 255, 0.75);
+  --line: rgba(0, 0, 0, 0.16);
+}
+
+.time-app[data-theme="midnight"] {
+  --bg-a: #02040a;
+  --bg-b: #111827;
+  --bg-c: #22304d;
+  --accent: #7dd3fc;
+  --accent-2: #c4b5fd;
+}
+
+.time-app[data-theme="rose"] {
+  --bg-a: #1b0810;
+  --bg-b: #5f2038;
+  --bg-c: #d7a295;
+  --accent: #ffd0dc;
+  --accent-2: #ffb86c;
+}
+
+.time-app[data-theme="solar"] {
+  --bg-a: #100d04;
+  --bg-b: #4a3d07;
+  --bg-c: #e9a92f;
+  --accent: #fff4a8;
+  --accent-2: #45ffd0;
+}
+
+.time-app[data-theme="ocean"] {
+  --bg-a: #03131f;
+  --bg-b: #064667;
+  --bg-c: #1e8b98;
+  --accent: #85f3ff;
+  --accent-2: #b3f5c8;
+}
+
+.time-app.is-countdown-done {
+  --bg-a: #200306;
+  --bg-b: #7b0b15;
+  --bg-c: #e73844;
+  --accent: #ffb8bd;
+  --accent-2: #fff0ef;
+  --glass: rgba(255, 255, 255, 0.14);
+  --glass-strong: rgba(255, 210, 214, 0.25);
+}
+
+.time-app.is-countdown-done::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.14), transparent 34%),
+    linear-gradient(135deg, rgba(120, 0, 12, 0.5), rgba(255, 50, 64, 0.22));
+  pointer-events: none;
+}
+
+.ambient {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(34px);
+  opacity: 0.46;
+  pointer-events: none;
+}
+
+.ambient-one {
+  width: 34vw;
+  height: 34vw;
+  left: -10vw;
+  top: -11vw;
+  background: var(--accent);
+}
+
+.ambient-two {
+  width: 30vw;
+  height: 30vw;
+  right: -8vw;
+  bottom: -10vw;
+  background: var(--accent-2);
+}
+
+.glass-panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(140deg, var(--glass-strong), transparent 120%),
+    var(--glass);
+  box-shadow: 0 22px 70px var(--shadow);
+  backdrop-filter: blur(28px) saturate(150%);
+}
+
+.hourglass-button {
+  position: fixed;
+  z-index: 10;
+  top: clamp(14px, 2.3vw, 28px);
+  right: clamp(14px, 2.3vw, 28px);
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+  color: var(--text);
+  font-size: 1rem;
+  opacity: 0.62;
+  backdrop-filter: blur(20px) saturate(145%);
+  transition: transform 160ms ease, background 160ms ease, opacity 160ms ease;
+}
+
+.hourglass-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.14);
+  opacity: 0.92;
+}
+
+.settings-popover {
+  position: fixed;
+  z-index: 9;
+  top: clamp(66px, 7.8vw, 82px);
+  right: clamp(14px, 2.3vw, 28px);
+  display: grid;
+  gap: 13px;
+  width: min(430px, calc(100vw - 28px));
+  max-height: calc(100vh - 166px);
+  padding: 15px;
+}
+
+.settings-popover label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 740;
+}
+
+input {
+  min-width: 0;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  outline: none;
+}
+
+input:not([type="range"]) {
+  padding: 0 11px;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.time-app[data-theme="alpine"] input,
+.time-app[data-theme="mono"] input {
+  color-scheme: light;
+}
+
+.glass-select {
+  position: relative;
+  min-width: 0;
+}
+
+.glass-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)),
+    rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  padding: 8px 11px;
+  text-align: left;
+  backdrop-filter: blur(22px) saturate(150%);
+}
+
+.glass-select-trigger span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.glass-select-trigger small {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 740;
+}
+
+.glass-select-trigger strong {
+  overflow: hidden;
+  font-size: 0.92rem;
+  font-weight: 760;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.glass-select-trigger i {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--accent);
+  font-style: normal;
+  line-height: 1;
+}
+
+.glass-menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  display: grid;
+  gap: 6px;
+  max-height: min(292px, 42vh);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.12)),
+    color-mix(in srgb, var(--bg-b) 58%, transparent);
+  box-shadow: 0 22px 70px var(--shadow);
+  backdrop-filter: blur(30px) saturate(170%);
+  -webkit-overflow-scrolling: touch;
+}
+
+.glass-menu button {
+  display: grid;
+  gap: 2px;
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.glass-menu button:hover,
+.glass-menu button.selected {
+  border-color: color-mix(in srgb, var(--accent) 72%, var(--line));
+  background: color-mix(in srgb, var(--accent) 24%, rgba(255, 255, 255, 0.14));
+}
+
+.glass-menu button.selected {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.glass-menu span {
+  overflow: hidden;
+  font-size: 0.86rem;
+  font-weight: 760;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.glass-menu small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.68rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.theme-grid button {
+  overflow: hidden;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  font-size: 0.72rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.theme-grid button.active {
+  border-color: color-mix(in srgb, var(--accent) 80%, var(--line));
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+.clock-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: calc(14px * var(--time-scale));
+  width: 100vw;
+  height: 100vh;
+  padding: 0 18px calc(86px + 24px * var(--time-scale));
+  text-align: center;
+  pointer-events: none;
+}
+
+.brand {
+  margin: 0 0 clamp(12px, 2vw, 24px);
+  color: var(--muted);
+  font-size: clamp(0.78rem, 1.2vw, 1rem);
+  font-weight: 760;
+  letter-spacing: 0;
+}
+
+.now-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 74px;
+  height: 38px;
+  margin: 0;
+  padding: 0 18px;
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--line) 56%, transparent);
+  border-radius: 8px;
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.018)),
+    rgba(255, 255, 255, 0.026);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  color: color-mix(in srgb, var(--text) 44%, transparent);
+  font-size: clamp(0.86rem, 1.1vw, 0.98rem);
+  font-weight: 820;
+  letter-spacing: 0;
+  backdrop-filter: blur(20px) saturate(150%);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.now-button:hover {
+  border-color: color-mix(in srgb, var(--accent) 72%, var(--line));
+  background: color-mix(in srgb, var(--accent) 18%, rgba(255, 255, 255, 0.065));
+  color: color-mix(in srgb, var(--text) 88%, transparent);
+  transform: translateY(-2px);
+}
+
+.main-time-wrap {
+  position: static;
+  display: block;
+  width: 100vw;
+  max-width: none;
+  overflow: visible;
+  text-align: center;
+}
+
+.main-time {
+  display: inline-block;
+  max-width: none;
+  font-family: var(--display-font);
+  font-size: calc(clamp(4.2rem, 14vw, 13.2rem) * var(--time-scale));
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  line-height: 0.88;
+  text-shadow: 0 0 46px color-mix(in srgb, var(--accent) 35%, transparent);
+  white-space: nowrap;
+}
+
+.main-time-wrap.is-countdown .main-time {
+  font-size: calc(clamp(3.7rem, 12.5vw, 11.5rem) * var(--time-scale));
+}
+
+.main-time-wrap.countdown-stopwatch .main-time {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-weight: 780;
+  text-shadow: 0 0 30px color-mix(in srgb, var(--accent) 46%, transparent);
+}
+
+.main-time-wrap.countdown-hourglass .main-time {
+  color: color-mix(in srgb, var(--accent-2) 78%, var(--text));
+  font-family: ui-serif, "Times New Roman", serif;
+  font-weight: 740;
+  text-shadow: 0 0 38px color-mix(in srgb, var(--accent-2) 42%, transparent);
+}
+
+.main-time-wrap.countdown-pulse .main-time {
+  color: color-mix(in srgb, var(--accent) 70%, var(--text));
+  animation: countdownPulse 1.4s ease-in-out infinite;
+}
+
+.main-time-wrap.countdown-crystal .main-time {
+  color: transparent;
+  background: linear-gradient(105deg, var(--text), var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: none;
+}
+
+@keyframes countdownPulse {
+  0%,
+  100% {
+    opacity: 0.82;
+    filter: drop-shadow(0 0 14px color-mix(in srgb, var(--accent) 28%, transparent));
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 34px color-mix(in srgb, var(--accent) 56%, transparent));
+  }
+}
+
+.countdown-progress {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: clamp(82px, calc(3vh + 62px), 112px);
+  z-index: 9;
+  width: auto;
+  height: 9px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+  border-radius: 999px;
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04)),
+    rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 14px 38px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(22px) saturate(150%);
+}
+
+.countdown-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 62%, transparent), var(--accent), var(--accent-2)),
+    rgba(255, 255, 255, 0.24);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 48%, transparent);
+  transform-origin: left center;
+  transition: transform 220ms linear;
+}
+
+.countdown-progress-stopwatch span {
+  background: linear-gradient(90deg, #d7e3f1, var(--accent));
+}
+
+.countdown-progress-hourglass span {
+  background: linear-gradient(90deg, #ffd36f, var(--accent-2));
+}
+
+.countdown-progress-pulse span {
+  animation: progressPulse 1.2s ease-in-out infinite;
+}
+
+.countdown-progress-crystal span {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.48), var(--accent), #ffffff);
+}
+
+@keyframes progressPulse {
+  0%,
+  100% {
+    filter: saturate(1);
+  }
+
+  50% {
+    filter: saturate(1.6) brightness(1.18);
+  }
+}
+
+.date-line {
+  margin: 0;
+  color: var(--muted);
+  font-size: calc(clamp(0.95rem, 1.6vw, 1.28rem) * var(--time-scale));
+}
+
+.world-dock {
+  position: fixed;
+  right: clamp(16px, 3vw, 34px);
+  bottom: clamp(88px, calc(8vh + 18px * var(--time-scale)), 142px);
+  display: grid;
+  width: min(calc(680px * var(--world-scale, 1)), calc(100vw - 32px));
+  padding: 0;
+  text-align: left;
+  opacity: 0.96;
+  pointer-events: auto;
+  overflow: visible;
+  transition: opacity 160ms ease, transform 160ms ease, border-color 160ms ease;
+}
+
+.world-dock:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.world-clock-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: calc(9px * var(--world-scale, 1));
+  padding: calc(10px * var(--world-scale, 1));
+}
+
+.world-clock-card {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-content: center;
+  justify-items: center;
+  gap: calc(6px * var(--world-scale, 1));
+  min-height: calc(92px * var(--world-scale, 1));
+  padding: calc(13px * var(--world-scale, 1)) calc(34px * var(--world-scale, 1)) calc(12px * var(--world-scale, 1)) calc(12px * var(--world-scale, 1));
+  border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: visible;
+}
+
+.world-time-button {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: calc(7px * var(--world-scale, 1));
+  min-width: 0;
+  margin-left: calc(-10px * var(--world-scale, 1));
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  transition: color 160ms ease, filter 160ms ease;
+}
+
+.world-time-button:hover,
+.world-time-button[aria-expanded="true"] {
+  color: color-mix(in srgb, var(--accent) 88%, var(--text));
+  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 34%, transparent));
+}
+
+.world-time-menu {
+  top: auto;
+  bottom: calc(100% + 9px);
+  left: auto;
+  right: 50%;
+  width: min(420px, calc(100vw - 34px));
+  max-height: min(246px, 42vh);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  transform: translateX(50%);
+  z-index: 30;
+}
+
+.world-clock-place span,
+.world-clock-place small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.world-clock-place span {
+  color: var(--text);
+  font-size: calc(0.9rem * var(--world-scale, 1));
+  font-weight: 790;
+  text-align: center;
+}
+
+.world-clock-place small {
+  margin-top: calc(2px * var(--world-scale, 1));
+  color: var(--muted);
+  font-size: calc(0.72rem * var(--world-scale, 1));
+  font-weight: 680;
+  text-align: center;
+}
+
+.world-time-button time {
+  color: currentColor;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: calc(1.42rem * var(--world-scale, 1));
+  font-variant-numeric: tabular-nums;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.day-offset {
+  display: inline-block;
+  min-width: calc(18px * var(--world-scale, 1));
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: calc(0.64rem * var(--world-scale, 1));
+  font-weight: 820;
+  line-height: 1;
+}
+
+.world-card-actions {
+  position: absolute;
+  top: calc(7px * var(--world-scale, 1));
+  right: calc(7px * var(--world-scale, 1));
+  z-index: 6;
+  display: flex;
+  gap: calc(5px * var(--world-scale, 1));
+  align-items: center;
+}
+
+.world-add-control {
+  position: absolute;
+  right: calc(8px * var(--world-scale, 1));
+  top: calc(-34px * var(--world-scale, 1));
+  width: calc(28px * var(--world-scale, 1));
+  height: calc(28px * var(--world-scale, 1));
+  z-index: 8;
+}
+
+.world-add-button {
+  display: grid;
+  place-items: center;
+  width: calc(25px * var(--world-scale, 1));
+  height: calc(25px * var(--world-scale, 1));
+  border: 1px solid color-mix(in srgb, var(--line) 68%, transparent);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.045);
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  font-size: calc(0.98rem * var(--world-scale, 1));
+  line-height: 1;
+}
+
+.world-add-button:hover,
+.world-add-button[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--accent) 68%, var(--line));
+  background: color-mix(in srgb, var(--accent) 16%, rgba(255, 255, 255, 0.07));
+  color: var(--text);
+}
+
+.world-add-control .glass-menu {
+  top: auto;
+  bottom: calc(100% + 8px);
+  left: auto;
+  right: 0;
+  width: min(420px, calc(100vw - 34px));
+  max-height: min(246px, 42vh);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  z-index: 30;
+}
+
+.world-add-control .glass-select-trigger {
+  display: grid;
+  place-items: center;
+  width: calc(25px * var(--world-scale, 1));
+  min-height: calc(25px * var(--world-scale, 1));
+  height: calc(25px * var(--world-scale, 1));
+  border: 1px solid color-mix(in srgb, var(--line) 68%, transparent);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.045);
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  padding: 0;
+}
+
+.world-add-control .glass-select-trigger span,
+.world-add-control .glass-select-trigger small {
+  display: none;
+}
+
+.world-add-control .glass-select-trigger i {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  font-size: calc(0.92rem * var(--world-scale, 1));
+}
+
+.world-card-actions > button {
+  width: calc(25px * var(--world-scale, 1));
+  height: calc(25px * var(--world-scale, 1));
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--text);
+  font-size: calc(0.98rem * var(--world-scale, 1));
+  line-height: 1;
+}
+
+.world-add-control .glass-select-trigger:hover {
+  border-color: color-mix(in srgb, var(--accent) 68%, var(--line));
+  background: color-mix(in srgb, var(--accent) 16%, rgba(255, 255, 255, 0.07));
+  color: var(--text);
+}
+
+.world-menu-group {
+  display: grid;
+  gap: 6px;
+}
+
+.world-menu-group > span {
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  font-size: 0.68rem;
+  font-weight: 820;
+}
+
+.world-menu-group > div {
+  display: grid;
+  gap: 6px;
+}
+
+.world-menu-group button {
+  display: grid;
+  gap: 2px;
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.world-menu-group button:hover,
+.world-menu-group button.selected {
+  border-color: color-mix(in srgb, var(--accent) 72%, var(--line));
+  background: color-mix(in srgb, var(--accent) 24%, rgba(255, 255, 255, 0.14));
+}
+
+.world-menu-group strong,
+.world-menu-group small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.world-menu-group strong {
+  font-size: 0.82rem;
+  font-weight: 780;
+}
+
+.world-menu-group small {
+  color: var(--muted);
+  font-size: 0.66rem;
+}
+
+.world-card-actions > button:hover {
+  border-color: color-mix(in srgb, #ff8fa3 70%, var(--line));
+  background: rgba(255, 143, 163, 0.18);
+}
+
+.world-resize-handle {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  z-index: 7;
+  width: 18px;
+  height: 18px;
+  border: 0;
+  border-radius: 5px;
+  background:
+    linear-gradient(135deg, transparent 47%, color-mix(in srgb, var(--accent) 66%, transparent) 48% 56%, transparent 57%),
+    linear-gradient(135deg, transparent 64%, color-mix(in srgb, var(--text) 46%, transparent) 65% 73%, transparent 74%);
+  cursor: nwse-resize;
+  opacity: 0.56;
+}
+
+.world-resize-handle:hover {
+  opacity: 1;
+}
+
+.mode-panel {
+  position: fixed;
+  z-index: 8;
+  left: 50%;
+  bottom: clamp(92px, calc(10vh + 20px * var(--time-scale)), 154px);
+  display: grid;
+  gap: 12px;
+  width: min(560px, calc(100vw - 28px));
+  padding: 15px;
+  transform: translateX(-50%);
+}
+
+.selected-world {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  text-align: center;
+}
+
+.selected-world span,
+.countdown-face span,
+.selected-world small,
+.countdown-face small {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.selected-world strong {
+  font-size: clamp(1.25rem, 2.2vw, 1.9rem);
+  font-weight: 800;
+}
+
+.selected-world time,
+.countdown-face time {
+  color: var(--accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: clamp(2.2rem, 6vw, 4.4rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.countdown-editor {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.countdown-editor .preset-row,
+.countdown-editor .countdown-style-row,
+.countdown-editor .custom-duration,
+.countdown-editor .countdown-face {
+  grid-column: 1 / -1;
+}
+
+.mode-panel .glass-menu {
+  top: auto;
+  bottom: calc(100% + 8px);
+}
+
+.countdown-face {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  text-align: center;
+}
+
+.preset-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.countdown-style-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.custom-duration {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.custom-duration label {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 780;
+}
+
+.custom-duration input {
+  height: 32px;
+  text-align: right;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 1.06rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 820;
+}
+
+.preset-row button,
+.countdown-style-row button,
+.start-button {
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 760;
+}
+
+.preset-row button:hover,
+.preset-row button.active,
+.countdown-style-row button:hover,
+.countdown-style-row button.active,
+.start-button:hover {
+  border-color: color-mix(in srgb, var(--accent) 72%, var(--line));
+  background: color-mix(in srgb, var(--accent) 24%, rgba(255, 255, 255, 0.12));
+}
+
+.start-button {
+  background: color-mix(in srgb, var(--accent-2) 24%, rgba(255, 255, 255, 0.12));
+}
+
+.countdown-face time {
+  color: var(--accent-2);
+  font-size: clamp(1.9rem, 5vw, 3.8rem);
+}
+
+.bottom-switch {
+  position: fixed;
+  z-index: 10;
+  left: 50%;
+  bottom: clamp(16px, 3vh, 30px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 10px;
+  width: min(420px, calc(100vw - 28px));
+  transform: translateX(-50%);
+}
+
+.bottom-switch button {
+  height: 52px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.13);
+  box-shadow: 0 18px 48px var(--shadow);
+  color: var(--text);
+  font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+  font-weight: 780;
+  backdrop-filter: blur(24px) saturate(160%);
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.bottom-switch button:hover,
+.bottom-switch button.active {
+  border-color: color-mix(in srgb, var(--accent) 78%, var(--line));
+  background: color-mix(in srgb, var(--accent) 24%, rgba(255, 255, 255, 0.14));
+  transform: translateY(-2px);
+}
+
+@media (max-width: 720px) {
+  .time-app {
+    min-height: 680px;
+  }
+
+  .hourglass-button {
+    width: 38px;
+    height: 38px;
+    font-size: 0.92rem;
+  }
+
+  .main-time {
+    font-size: calc(clamp(3.35rem, 17.5vw, 6.8rem) * var(--time-scale));
+  }
+
+  .clock-stage {
+    padding-bottom: calc(104px + 22px * var(--time-scale));
+  }
+
+  .world-dock {
+    right: 14px;
+    bottom: clamp(86px, 12vh, 118px);
+    width: min(calc(420px * var(--world-scale, 1)), calc(100vw - 28px));
+  }
+
+  .world-dock:hover {
+    transform: translateY(-2px);
+  }
+
+  .world-clock-card {
+    min-height: calc(78px * var(--world-scale, 1));
+    padding: calc(9px * var(--world-scale, 1));
+  }
+
+  .world-time-button time {
+    font-size: calc(0.95rem * var(--world-scale, 1));
+  }
+
+  .world-clock-place span {
+    font-size: calc(0.68rem * var(--world-scale, 1));
+  }
+
+  .world-clock-place small {
+    font-size: calc(0.56rem * var(--world-scale, 1));
+  }
+
+  .world-add-control .glass-menu,
+  .world-time-menu {
+    width: min(340px, calc(100vw - 28px));
+    grid-template-columns: 1fr;
+  }
+
+  .settings-popover {
+    max-height: calc(100vh - 152px);
+  }
+
+  .theme-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .preset-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .countdown-style-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mode-panel {
+    bottom: clamp(88px, calc(8vh + 18px * var(--time-scale)), 126px);
+  }
+
+  .countdown-editor {
+    grid-template-columns: 1fr;
+  }
+}
+:root{--font-geist-sans:var(--font-system);--font-geist-mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}.hidden{display:none!important}.theme-grid button,.preset-row button,.countdown-style-row button,.start-button,.bottom-switch button,.hourglass-button,.now-button,.world-add-button,.world-time-button,.world-card-actions button{cursor:pointer}.world-time-menu,.world-add-menu{pointer-events:auto}
   </style>
 </head>
 <body>
-  <main class="app" data-theme="aurora">
-    <div class="ambient a1"></div><div class="ambient a2"></div>
-    <button class="hourglass interactive" aria-label="打开显示设置">⌛</button>
-    <aside class="settings glass interactive hidden">
-      <label>字号大小<input id="size" type="range" min="0.58" max="1.85" step="0.02" value="1"></label>
-      <div class="select" data-select="font"></div>
-      <div class="theme-grid"></div>
+  <main class="time-app" data-theme="aurora" style="--time-scale:1;--display-font:var(--font-system)">
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <button class="hourglass-button" data-interactive-panel type="button" aria-label="打开显示设置" aria-expanded="false">⌛</button>
+    <aside class="settings-popover glass-panel hidden" data-interactive-panel aria-label="显示设置">
+      <label>字号大小<input id="sizeControl" type="range" min="0.58" max="1.85" step="0.02" value="1"></label>
+      <div class="glass-select" id="fontSelect"></div>
+      <div class="theme-grid" aria-label="风格预设"></div>
     </aside>
-    <section class="stage">
-      <button class="now interactive">Now</button>
-      <div class="time-wrap"><time class="main-time">00:00:00</time></div>
-      <p class="date">正在同步本地时间</p>
+    <section class="clock-stage" aria-label="当前时间">
+      <div class="main-time-wrap"><time class="main-time">00:00:00</time></div>
+      <div class="countdown-progress hidden" aria-hidden="true"><span style="transform:scaleX(0)"></span></div>
+      <p class="date-line">正在同步本地时间</p>
+      <aside class="world-dock" data-interactive-panel aria-label="主页世界时间" style="--world-scale:1">
+        <div class="world-add-control hidden">
+          <button class="world-add-button" type="button" aria-label="添加世界时间" aria-expanded="false">+</button>
+          <div class="glass-menu world-time-menu world-add-menu hidden" role="listbox" aria-label="添加世界时间"></div>
+        </div>
+        <div class="world-clock-list"></div>
+        <button class="world-resize-handle" type="button" aria-label="缩放世界时间卡片"></button>
+      </aside>
     </section>
-    <section class="panel world glass interactive hidden">
-      <div class="select" data-select="capital"></div>
-      <div class="selected"><span></span><strong></strong><time>00:00:00</time><small>同步中</small></div>
+    <section class="mode-panel countdown-editor glass-panel hidden" data-interactive-panel aria-label="倒计时">
+      <div class="preset-row" aria-label="预设倒计时"></div>
+      <div class="countdown-style-row" aria-label="倒计时显示风格"></div>
+      <div class="custom-duration hidden" aria-label="自定义倒计时">
+        <label>小时<input id="customHours" inputmode="numeric" min="0"></label>
+        <label>分钟<input id="customMinutes" inputmode="numeric" min="0"></label>
+        <label>秒<input id="customSeconds" inputmode="numeric" min="0"></label>
+      </div>
+      <button class="start-button" type="button">开始</button>
+      <div class="countdown-face"><span>剩余时间</span><time>00:00:00</time><small>归零后会继续显示已过去时间</small></div>
     </section>
-    <section class="panel count-panel glass interactive hidden">
-      <div class="select" data-select="countdown"></div>
-      <div class="preset"></div>
-      <input class="count-title" aria-label="倒计时名称">
-      <input class="count-target" aria-label="修改倒计时目标时间" type="datetime-local" step="1">
-      <button class="start">开始</button>
-      <div class="face"><span>剩余时间</span><time>00:00:00</time><small>归零后会继续显示已过去时间</small></div>
-    </section>
-    <nav class="bottom interactive"><button data-mode="world">世界时间</button><button data-mode="countdown">倒计时</button></nav>
+    <nav class="bottom-switch" data-interactive-panel aria-label="时间功能切换">
+      <button class="active" type="button" data-action="now">Now</button>
+      <button type="button" data-action="countdown">倒计时</button>
+    </nav>
   </main>
   <script>
-    const capitals=[["中国","北京","Asia/Shanghai"],["美国","华盛顿","America/New_York"],["英国","伦敦","Europe/London"],["法国","巴黎","Europe/Paris"],["德国","柏林","Europe/Berlin"],["日本","东京","Asia/Tokyo"],["韩国","首尔","Asia/Seoul"],["印度","新德里","Asia/Kolkata"],["澳大利亚","堪培拉","Australia/Sydney"],["加拿大","渥太华","America/Toronto"],["巴西","巴西利亚","America/Sao_Paulo"],["俄罗斯","莫斯科","Europe/Moscow"],["阿联酋","阿布扎比","Asia/Dubai"],["新加坡","新加坡","Asia/Singapore"],["南非","比勒陀利亚","Africa/Johannesburg"],["墨西哥","墨西哥城","America/Mexico_City"]];
-    const themes=[["aurora","极光玻璃"],["graphite","石墨钛"],["alpine","雪岭白"],["cobalt","钴蓝电弧"],["ember","日落熔金"],["orchid","兰紫霓虹"],["mint","薄荷晶体"],["mono","极简单色"],["midnight","午夜航站"],["rose","玫瑰金"],["solar","太阳风"],["ocean","深海蓝"]];
-    const fonts=[["Apple 系统","var(--font-system)"],["System Mono","ui-monospace,SFMono-Regular,Menlo,monospace"],["Times","Times New Roman,serif"],["Rounded","ui-rounded,SF Pro Rounded,Arial,sans-serif"],["Arial","Arial,sans-serif"]];
-    const presets=[["ten","10 分钟",10],["fifteen","15 分钟",15],["twenty","20 分钟",20],["thirty","30 分钟",30],["hour","1 小时",60],["ninety","90 分钟",90]];
-    const $=s=>document.querySelector(s), app=$(".app");let now=new Date(), mode="home", display="local", openMenu=null, selectedCapital="Asia/Shanghai", activeId="ten";
-    const localValue=d=>new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,19);
-    const plus=m=>localValue(new Date(Date.now()+m*60000));
-    let countdowns=[["ten","10 分钟",plus(10)],["fifteen","15 分钟",plus(15)],["twenty","20 分钟",plus(20)],["thirty","30 分钟",plus(30)],["hour","1 小时",plus(60)],["ninety","90 分钟",plus(90)],["custom","自定义倒计时",plus(45)]];
-    const fmt=(d,z,o)=>new Intl.DateTimeFormat("zh-CN",{timeZone:z,...o}).format(d);
-    const week=(d,z)=>{let y,m,day;if(z){const p=new Intl.DateTimeFormat("en-CA",{timeZone:z,year:"numeric",month:"numeric",day:"numeric"}).formatToParts(d);y=+p.find(x=>x.type==="year").value;m=+p.find(x=>x.type==="month").value;day=+p.find(x=>x.type==="day").value}else{y=d.getFullYear();m=d.getMonth()+1;day=d.getDate()}const u=new Date(Date.UTC(y,m-1,day)),wd=u.getUTCDay()||7;u.setUTCDate(u.getUTCDate()+4-wd);const ys=new Date(Date.UTC(u.getUTCFullYear(),0,1));return Math.ceil(((u-ys)/86400000+1)/7)};
-    const dateWithWeek=(d,z)=>`${new Intl.DateTimeFormat("zh-CN",{...(z?{timeZone:z}:{}),weekday:"long",year:"numeric",month:"long",day:"numeric"}).format(d)} · 第 ${week(d,z)} 周`;
-    const dur=(ms,ceil=false)=>{let t=Math.max(0,(ceil?Math.ceil:Math.floor)(ms/1000)),d=Math.floor(t/86400),h=Math.floor(t%86400/3600),m=Math.floor(t%3600/60),s=t%60;return d?`${d}天 ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`:`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`};
-    const active=()=>countdowns.find(x=>x[0]===activeId)||countdowns[0], cap=()=>capitals.find(x=>x[2]===selectedCapital)||capitals[0];
-    function closePanels(){openMenu=null;mode="home";$(".settings").classList.add("hidden");render()}
-    function selectHTML(kind,label,opts,value){const sel=opts.find(o=>o.value===value)||opts[0];return `<button class="trigger" aria-expanded="${openMenu===kind}"><span><small>${label}</small><strong>${sel.label}</strong></span><i>⌄</i></button>${openMenu===kind?`<div class="menu">${opts.map(o=>`<button data-value="${o.value}" class="${o.value===value?"selected":""}"><span>${o.label}</span>${o.detail?`<small>${o.detail}</small>`:""}</button>`).join("")}</div>`:""}`}
-    function wireSelect(kind,label,opts,value,onChange){const root=document.querySelector(`[data-select="${kind}"]`),cache=JSON.stringify({kind,label,opts,value,open:openMenu===kind});if(root.dataset.cache!==cache){root.dataset.cache=cache;root.innerHTML=selectHTML(kind,label,opts,value);root.querySelector(".trigger").onclick=()=>{openMenu=openMenu===kind?null:kind;render()};const menu=root.querySelector(".menu");if(menu)menu.onpointerdown=e=>e.stopPropagation();root.querySelectorAll(".menu button").forEach(b=>b.onclick=()=>{onChange(b.dataset.value);openMenu=null;render()})}}
-    function render(){const a=active(), delta=new Date(a[2])-now, done=delta<=0, c=cap();document.querySelectorAll(".bottom button").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));$(".world").classList.toggle("hidden",mode!=="world");$(".count-panel").classList.toggle("hidden",mode!=="countdown");$(".time-wrap").classList.toggle("countdown",display==="countdown");
-      $(".main-time").textContent=display==="world"?fmt(now,c[2],{hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false}):display==="countdown"?(done?dur(Math.abs(delta)):dur(delta,true)):now.toLocaleTimeString("zh-CN",{hour12:false});
-      $(".date").textContent=display==="world"?`${c[0]} · ${c[1]} · ${dateWithWeek(now,c[2])}`:display==="countdown"?`${a[1]} · ${done?"已经结束":"倒计时进行中"}`:dateWithWeek(now);
-      wireSelect("font","字体",fonts.map(x=>({label:x[0],value:x[1]})),app.style.getPropertyValue("--display-font")||"var(--font-system)",v=>app.style.setProperty("--display-font",v));
-      wireSelect("capital","选择国家首都",capitals.map(x=>({label:`${x[0]} · ${x[1]}`,value:x[2],detail:x[2]})),selectedCapital,v=>{selectedCapital=v;display="world"});
-      wireSelect("countdown","选择倒计时",countdowns.map(x=>({label:x[1],value:x[0],detail:x[2].replace("T"," ")})),activeId,v=>{activeId=v;const p=presets.find(x=>x[0]===v);if(p){const t=plus(p[2]);countdowns=countdowns.map(x=>x[0]===v?[x[0],p[1],t]:x)}});
-      $(".selected span").textContent=c[0];$(".selected strong").textContent=c[1];$(".selected time").textContent=fmt(now,c[2],{hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false});$(".selected small").textContent=dateWithWeek(now,c[2]);
-      $(".count-title").value=a[1];$(".count-target").value=a[2];$(".face span").textContent=done?"已经结束":"剩余时间";$(".face time").textContent=done?dur(Math.abs(delta)):dur(delta,true);$(".face small").textContent=done?`结束后已过去 ${dur(Math.abs(delta))}`:"归零后会继续显示已过去时间";
+(() => {
+  const preferencesKey = "timenow-studio-preferences";
+  const continentNames = { asia: "亚洲", europe: "欧洲", northAmerica: "北美", southAmerica: "南美", oceania: "大洋洲", africa: "非洲" };
+  const capitals = [
+    { country: "中国", city: "北京", zone: "Asia/Shanghai" },
+    { country: "美国", city: "华盛顿", zone: "America/New_York" },
+    { country: "英国", city: "伦敦", zone: "Europe/London" },
+    { country: "法国", city: "巴黎", zone: "Europe/Paris" },
+    { country: "德国", city: "柏林", zone: "Europe/Berlin" },
+    { country: "日本", city: "东京", zone: "Asia/Tokyo" },
+    { country: "韩国", city: "首尔", zone: "Asia/Seoul" },
+    { country: "印度", city: "新德里", zone: "Asia/Kolkata" },
+    { country: "澳大利亚", city: "堪培拉", zone: "Australia/Sydney" },
+    { country: "加拿大", city: "渥太华", zone: "America/Toronto" },
+    { country: "巴西", city: "巴西利亚", zone: "America/Sao_Paulo" },
+    { country: "俄罗斯", city: "莫斯科", zone: "Europe/Moscow" },
+    { country: "阿联酋", city: "阿布扎比", zone: "Asia/Dubai" },
+    { country: "新加坡", city: "新加坡", zone: "Asia/Singapore" },
+    { country: "南非", city: "比勒陀利亚", zone: "Africa/Johannesburg" },
+    { country: "墨西哥", city: "墨西哥城", zone: "America/Mexico_City" },
+  ];
+  const capitalContinents = {
+    "Asia/Shanghai": "asia", "Asia/Tokyo": "asia", "Asia/Seoul": "asia", "Asia/Kolkata": "asia", "Asia/Dubai": "asia", "Asia/Singapore": "asia",
+    "Europe/London": "europe", "Europe/Paris": "europe", "Europe/Berlin": "europe", "Europe/Moscow": "europe",
+    "America/New_York": "northAmerica", "America/Toronto": "northAmerica", "America/Mexico_City": "northAmerica", "America/Sao_Paulo": "southAmerica",
+    "Australia/Sydney": "oceania", "Africa/Johannesburg": "africa",
+  };
+  const themes = [["aurora","极光玻璃"],["graphite","石墨钛"],["alpine","雪岭白"],["cobalt","钴蓝电弧"],["ember","日落熔金"],["orchid","兰紫霓虹"],["mint","薄荷晶体"],["mono","极简单色"],["midnight","午夜航站"],["rose","玫瑰金"],["solar","太阳风"],["ocean","深海蓝"]];
+  const fonts = [
+    { label: "Apple 系统", value: "var(--font-system)" },
+    { label: "Geist Sans", value: "var(--font-geist-sans)" },
+    { label: "Geist Mono", value: "var(--font-geist-mono)" },
+    { label: "Times", value: "Times New Roman, serif" },
+    { label: "Rounded", value: "ui-rounded, SF Pro Rounded, Arial, sans-serif" },
+  ];
+  const countdownPresets = [
+    { id: "ten", label: "10 分钟", minutes: 10 },
+    { id: "fifteen", label: "15 分钟", minutes: 15 },
+    { id: "twenty", label: "20 分钟", minutes: 20 },
+    { id: "thirty", label: "30 分钟", minutes: 30 },
+    { id: "hour", label: "1 小时", minutes: 60 },
+    { id: "ninety", label: "90 分钟", minutes: 90 },
+  ];
+  const countdownStyles = [
+    { id: "classic", label: "时间倒计时" },
+    { id: "stopwatch", label: "秒表" },
+    { id: "hourglass", label: "沙漏" },
+    { id: "pulse", label: "脉冲" },
+    { id: "crystal", label: "晶格" },
+  ];
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const app = $(".time-app");
+  let now = new Date();
+  let mode = "home";
+  let displayMode = "local";
+  let openMenu = null;
+  let settingsOpen = false;
+  let theme = "aurora";
+  let font = "var(--font-system)";
+  let size = 1;
+  let worldScale = 1;
+  let worldClocks = ["America/New_York", "Europe/London", "Asia/Tokyo"];
+  let activeCountdownId = "ten";
+  let countdownStarted = false;
+  let countdownStyle = "classic";
+  let customDuration = { hours: "0", minutes: "45", seconds: "0" };
+  const countdownStarts = {};
+  let countdowns = [];
+
+  function toLocalDateTimeValue(date) {
+    return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 19);
+  }
+  function makeCountdowns() {
+    const base = new Date();
+    const plus = (minutes) => toLocalDateTimeValue(new Date(base.getTime() + minutes * 60000));
+    countdowns = [
+      { id: "ten", title: "10 分钟", target: plus(10) },
+      { id: "fifteen", title: "15 分钟", target: plus(15) },
+      { id: "twenty", title: "20 分钟", target: plus(20) },
+      { id: "thirty", title: "30 分钟", target: plus(30) },
+      { id: "hour", title: "1 小时", target: plus(60) },
+      { id: "ninety", title: "90 分钟", target: plus(90) },
+      { id: "custom", title: "自定义倒计时", target: toLocalDateTimeValue(new Date(base.getTime() + parseCustomDuration() * 1000)) },
+    ];
+    countdowns.forEach((item) => { countdownStarts[item.id] = base.toISOString(); });
+  }
+  function formatInZone(date, zone, options) {
+    return new Intl.DateTimeFormat("zh-CN", { timeZone: zone, ...options }).format(date);
+  }
+  function datePartsInZone(date, zone) {
+    if (!zone) return { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
+    const parts = new Intl.DateTimeFormat("en-CA", { timeZone: zone, year: "numeric", month: "numeric", day: "numeric" }).formatToParts(date);
+    return {
+      year: Number(parts.find((part) => part.type === "year")?.value),
+      month: Number(parts.find((part) => part.type === "month")?.value),
+      day: Number(parts.find((part) => part.type === "day")?.value),
+    };
+  }
+  function getZoneDayOffset(date, zone) {
+    const local = datePartsInZone(date);
+    const remote = datePartsInZone(date, zone);
+    return Math.round((Date.UTC(remote.year, remote.month - 1, remote.day) - Date.UTC(local.year, local.month - 1, local.day)) / 86400000);
+  }
+  function getWeekNumber(date, zone) {
+    const p = datePartsInZone(date, zone);
+    const zoned = new Date(Date.UTC(p.year, p.month - 1, p.day));
+    const day = zoned.getUTCDay() || 7;
+    zoned.setUTCDate(zoned.getUTCDate() + 4 - day);
+    const yearStart = new Date(Date.UTC(zoned.getUTCFullYear(), 0, 1));
+    return Math.ceil(((zoned.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
+  }
+  function formatDateWithWeek(date, zone) {
+    return `${new Intl.DateTimeFormat("zh-CN", { ...(zone ? { timeZone: zone } : {}), weekday: "long", year: "numeric", month: "long", day: "numeric" }).format(date)} · 第 ${getWeekNumber(date, zone)} 周`;
+  }
+  function formatDuration(ms, roundUp = false) {
+    const total = Math.max(0, (roundUp ? Math.ceil : Math.floor)(ms / 1000));
+    const days = Math.floor(total / 86400);
+    const hours = Math.floor((total % 86400) / 3600);
+    const minutes = Math.floor((total % 3600) / 60);
+    const seconds = total % 60;
+    const clock = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    return days > 0 ? `${days}天 ${clock}` : clock;
+  }
+  function parseCustomDuration() {
+    const hours = Math.max(0, parseInt(customDuration.hours, 10) || 0);
+    const minutes = Math.max(0, parseInt(customDuration.minutes, 10) || 0);
+    const seconds = Math.max(0, parseInt(customDuration.seconds, 10) || 0);
+    return Math.max(1, hours * 3600 + minutes * 60 + seconds);
+  }
+  function sanitizeDurationValue(value, key) {
+    return String(value).replace(/\D/g, "").slice(0, key === "hours" ? 3 : 2) || "0";
+  }
+  function activeCountdown() {
+    return countdowns.find((item) => item.id === activeCountdownId) || countdowns[0];
+  }
+  function savePreferences() {
+    localStorage.setItem(preferencesKey, JSON.stringify({ theme, font, size, worldScale, worldClocks, countdownStyle, customDuration }));
+  }
+  function loadPreferences() {
+    try {
+      const stored = JSON.parse(localStorage.getItem(preferencesKey) || "null");
+      if (!stored) return;
+      if (themes.some(([id]) => id === stored.theme)) theme = stored.theme;
+      if (fonts.some((item) => item.value === stored.font)) font = stored.font;
+      if (typeof stored.size === "number") size = Math.min(1.85, Math.max(0.58, stored.size));
+      if (typeof stored.worldScale === "number") worldScale = Math.min(1.45, Math.max(0.78, stored.worldScale));
+      if (Array.isArray(stored.worldClocks)) {
+        const saved = stored.worldClocks.filter((zone) => capitals.some((capital) => capital.zone === zone));
+        if (saved.length) worldClocks = [...new Set(saved)].slice(0, 3);
+      }
+      if (countdownStyles.some((style) => style.id === stored.countdownStyle)) countdownStyle = stored.countdownStyle;
+      if (stored.customDuration) {
+        customDuration = {
+          hours: sanitizeDurationValue(stored.customDuration.hours, "hours"),
+          minutes: sanitizeDurationValue(stored.customDuration.minutes, "minutes"),
+          seconds: sanitizeDurationValue(stored.customDuration.seconds, "seconds"),
+        };
+      }
+    } catch {
+      localStorage.removeItem(preferencesKey);
     }
-    $(".hourglass").onclick=()=>{$(".settings").classList.toggle("hidden");openMenu=null;render()};$(".now").onclick=()=>{display="local";closePanels()};$("#size").oninput=e=>app.style.setProperty("--scale",e.target.value);
-    $(".theme-grid").innerHTML=themes.map(t=>`<button data-theme="${t[0]}">${t[1]}</button>`).join("");document.querySelectorAll(".theme-grid button").forEach(b=>b.onclick=()=>{app.dataset.theme=b.dataset.theme;document.querySelectorAll(".theme-grid button").forEach(x=>x.classList.toggle("active",x===b))});document.querySelector("[data-theme=aurora]").classList.add("active");
-    $(".preset").innerHTML=presets.map(p=>`<button data-min="${p[2]}" data-id="${p[0]}">${p[1]}</button>`).join("");document.querySelectorAll(".preset button").forEach(b=>b.onclick=()=>{activeId=b.dataset.id;const t=plus(+b.dataset.min),p=presets.find(x=>x[0]===activeId);countdowns=countdowns.map(x=>x[0]===activeId?[x[0],p[1],t]:x);display="countdown";mode="home";openMenu=null;render()});
-    $(".count-title").oninput=e=>{countdowns=countdowns.map(x=>x[0]===activeId?[x[0],e.target.value,x[2]]:x)};$(".count-target").oninput=e=>{countdowns=countdowns.map(x=>x[0]===activeId?[x[0],x[1],e.target.value]:x)};$(".start").onclick=()=>{now=new Date();display="countdown";mode="home";openMenu=null;render()};
-    document.querySelectorAll(".bottom button").forEach(b=>b.onclick=()=>{mode=mode===b.dataset.mode?"home":b.dataset.mode;openMenu=null;render()});app.addEventListener("pointerdown",e=>{if(!e.target.closest(".interactive"))closePanels()});setInterval(()=>{now=new Date();render()},250);render();
+  }
+  function renderFontSelect() {
+    const selected = fonts.find((item) => item.value === font) || fonts[0];
+    $("#fontSelect").innerHTML = `<button class="glass-select-trigger" type="button" aria-label="字体" aria-expanded="${openMenu === "font"}"><span><small>字体</small><strong>${selected.label}</strong></span><i aria-hidden="true">⌄</i></button>${openMenu === "font" ? `<div class="glass-menu" role="listbox" aria-label="字体">${fonts.map((item) => `<button class="${item.value === font ? "selected" : ""}" role="option" type="button" data-font="${encodeURIComponent(item.value)}"><span>${item.label}</span></button>`).join("")}</div>` : ""}`;
+  }
+  function renderWorldMenu(options, selectedValue) {
+    return Object.keys(continentNames).map((continent) => {
+      const continentOptions = options.filter((option) => capitalContinents[option.value] === continent);
+      if (!continentOptions.length) return "";
+      return `<section class="world-menu-group"><span>${continentNames[continent]}</span><div>${continentOptions.map((option) => `<button class="${option.value === selectedValue ? "selected" : ""}" role="option" aria-selected="${option.value === selectedValue}" type="button" data-zone="${option.value}"><strong>${option.label}</strong><small>${option.detail}</small></button>`).join("")}</div></section>`;
+    }).join("");
+  }
+  function renderWorldClocks() {
+    const shown = worldClocks.map((zone) => capitals.find((capital) => capital.zone === zone)).filter(Boolean);
+    $(".world-add-control").classList.toggle("hidden", shown.length >= 3);
+    $(".world-add-button").setAttribute("aria-expanded", openMenu === "world-add");
+    const addOptions = capitals.map((capital) => ({ label: `${capital.country} · ${capital.city}`, value: capital.zone, detail: capital.zone })).filter((option) => !worldClocks.includes(option.value));
+    $(".world-add-menu").classList.toggle("hidden", openMenu !== "world-add");
+    $(".world-add-menu").innerHTML = openMenu === "world-add" ? renderWorldMenu(addOptions, "") : "";
+    $(".world-clock-list").innerHTML = shown.map((capital, index) => {
+      const dayOffset = getZoneDayOffset(now, capital.zone);
+      const menuOptions = capitals
+        .map((item) => ({ label: `${item.country} · ${item.city}`, value: item.zone, detail: item.zone }))
+        .filter((option) => option.value === worldClocks[index] || !worldClocks.includes(option.value));
+      return `<article class="world-clock-card" data-index="${index}">
+        <button class="world-time-button" type="button" aria-label="更换${capital.city}时间" aria-expanded="${openMenu === `world-${index}`}"><time>${formatInZone(now, capital.zone, { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })}</time>${dayOffset !== 0 ? `<span class="day-offset">${dayOffset > 0 ? `+${dayOffset}` : dayOffset}</span>` : ""}</button>
+        ${openMenu === `world-${index}` ? `<div class="glass-menu world-time-menu" role="listbox" aria-label="更换${capital.city}时间">${renderWorldMenu(menuOptions, capital.zone)}</div>` : ""}
+        <div class="world-clock-place"><span>${capital.city}</span><small>${capital.country}</small></div>
+        <div class="world-card-actions"><button aria-label="删除${capital.city}" type="button">×</button></div>
+      </article>`;
+    }).join("");
+  }
+  function render() {
+    const countdown = activeCountdown();
+    const countdownDelta = countdownStarted ? new Date(countdown.target).getTime() - now.getTime() : 0;
+    const countdownDone = countdownStarted && countdownDelta <= 0;
+    const startTime = Date.parse(countdownStarts[countdown.id] || "");
+    const targetTime = Date.parse(countdown.target);
+    const startBase = Number.isFinite(startTime) ? startTime : now.getTime();
+    const targetBase = Number.isFinite(targetTime) ? targetTime : now.getTime();
+    const progress = countdownStarted ? Math.min(1, Math.max(0, (now.getTime() - startBase) / Math.max(1, targetBase - startBase))) : 0;
+    app.dataset.theme = theme;
+    app.style.setProperty("--time-scale", size);
+    app.style.setProperty("--display-font", font);
+    $(".world-dock").style.setProperty("--world-scale", worldScale);
+    app.classList.toggle("is-countdown-done", countdownDone && displayMode === "countdown");
+    $(".settings-popover").classList.toggle("hidden", !settingsOpen);
+    $(".hourglass-button").setAttribute("aria-expanded", settingsOpen);
+    $(".main-time-wrap").className = `main-time-wrap ${displayMode === "countdown" && countdownStarted ? `is-countdown countdown-${countdownStyle}` : ""}`;
+    $(".main-time").textContent = displayMode === "countdown" && countdownStarted ? (countdownDone ? formatDuration(Math.abs(countdownDelta)) : formatDuration(countdownDelta, true)) : now.toLocaleTimeString("zh-CN", { hour12: false });
+    $(".main-time").dateTime = now.toISOString();
+    $(".date-line").textContent = displayMode === "countdown" && countdownStarted ? `${countdown.title} · ${countdownDone ? "已经结束" : "倒计时进行中"}` : formatDateWithWeek(now);
+    $(".countdown-progress").className = `countdown-progress countdown-progress-${countdownStyle} ${displayMode === "countdown" && countdownStarted ? "" : "hidden"}`;
+    $(".countdown-progress span").style.transform = `scaleX(${progress})`;
+    $(".world-dock").classList.toggle("hidden", mode === "countdown" || displayMode === "countdown");
+    $(".countdown-editor").classList.toggle("hidden", mode !== "countdown");
+    $(".bottom-switch [data-action='now']").classList.toggle("active", displayMode === "local" && mode === "home");
+    $(".bottom-switch [data-action='countdown']").classList.toggle("active", mode === "countdown");
+    $("#sizeControl").value = size;
+    $("#customHours").value = customDuration.hours;
+    $("#customMinutes").value = customDuration.minutes;
+    $("#customSeconds").value = customDuration.seconds;
+    renderFontSelect();
+    renderWorldClocks();
+    $(".theme-grid").innerHTML = themes.map(([id, label]) => `<button class="${theme === id ? "active" : ""}" type="button" data-theme="${id}">${label}</button>`).join("");
+    $(".preset-row").innerHTML = countdownPresets.map((preset) => `<button class="${activeCountdownId === preset.id ? "active" : ""}" type="button" data-preset="${preset.id}">${preset.label}</button>`).join("") + `<button class="${activeCountdownId === "custom" ? "active" : ""}" type="button" data-preset="custom">自定义</button>`;
+    $(".countdown-style-row").innerHTML = countdownStyles.map((style) => `<button class="${countdownStyle === style.id ? "active" : ""}" type="button" data-style="${style.id}">${style.label}</button>`).join("");
+    $(".custom-duration").classList.toggle("hidden", activeCountdownId !== "custom");
+    $(".countdown-face span").textContent = countdownDone ? "已经结束" : "剩余时间";
+    $(".countdown-face time").textContent = countdownDone ? formatDuration(Math.abs(countdownDelta)) : formatDuration(countdownDelta, true);
+    $(".countdown-face small").textContent = countdownDone ? `结束后已过去 ${formatDuration(Math.abs(countdownDelta))}` : "归零后会继续显示已过去时间";
+  }
+  function closePanels() {
+    openMenu = null;
+    settingsOpen = false;
+    mode = "home";
+    render();
+  }
+  function returnToNow() {
+    displayMode = "local";
+    countdownStarted = false;
+    closePanels();
+  }
+  function startPresetCountdown(minutes) {
+    const startedAt = new Date();
+    now = startedAt;
+    const preset = countdownPresets.find((item) => item.minutes === minutes);
+    const id = preset?.id || activeCountdownId;
+    activeCountdownId = id;
+    countdownStarted = true;
+    countdownStarts[id] = startedAt.toISOString();
+    countdowns = countdowns.map((item) => item.id === id ? { ...item, title: preset?.label || item.title, target: toLocalDateTimeValue(new Date(startedAt.getTime() + minutes * 60000)) } : item);
+    displayMode = "countdown";
+    mode = "home";
+    openMenu = null;
+    render();
+  }
+  function showCustomCountdown() {
+    const startedAt = new Date();
+    now = startedAt;
+    activeCountdownId = "custom";
+    countdownStarted = false;
+    countdownStarts.custom = startedAt.toISOString();
+    countdowns = countdowns.map((item) => item.id === "custom" ? { ...item, title: "自定义倒计时", target: toLocalDateTimeValue(new Date(startedAt.getTime() + parseCustomDuration() * 1000)) } : item);
+    openMenu = null;
+    render();
+  }
+  function startActiveCountdown() {
+    const startedAt = new Date();
+    now = startedAt;
+    countdownStarted = true;
+    countdownStarts[activeCountdownId] = startedAt.toISOString();
+    if (activeCountdownId === "custom") {
+      countdowns = countdowns.map((item) => item.id === "custom" ? { ...item, title: "自定义倒计时", target: toLocalDateTimeValue(new Date(startedAt.getTime() + parseCustomDuration() * 1000)) } : item);
+    }
+    displayMode = "countdown";
+    mode = "home";
+    openMenu = null;
+    render();
+  }
+
+  loadPreferences();
+  makeCountdowns();
+  $(".hourglass-button").addEventListener("click", (event) => { event.stopPropagation(); settingsOpen = !settingsOpen; openMenu = null; render(); });
+  $("#sizeControl").addEventListener("input", (event) => { size = Number(event.target.value); savePreferences(); render(); });
+  $("#fontSelect").addEventListener("click", (event) => {
+    const fontButton = event.target.closest("[data-font]");
+    if (fontButton) { font = decodeURIComponent(fontButton.dataset.font); openMenu = null; savePreferences(); render(); return; }
+    if (event.target.closest(".glass-select-trigger")) { openMenu = openMenu === "font" ? null : "font"; render(); }
+  });
+  $(".theme-grid").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-theme]");
+    if (!button) return;
+    theme = button.dataset.theme;
+    savePreferences();
+    render();
+  });
+  $(".world-dock").addEventListener("click", (event) => {
+    const addButton = event.target.closest(".world-add-button");
+    if (addButton) { openMenu = openMenu === "world-add" ? null : "world-add"; render(); return; }
+    const option = event.target.closest("[data-zone]");
+    if (option) {
+      const card = event.target.closest(".world-clock-card");
+      if (openMenu === "world-add") {
+        if (!worldClocks.includes(option.dataset.zone) && worldClocks.length < 3) worldClocks.push(option.dataset.zone);
+      } else if (card) {
+        worldClocks[Number(card.dataset.index)] = option.dataset.zone;
+      }
+      openMenu = null;
+      savePreferences();
+      render();
+      return;
+    }
+    const timeButton = event.target.closest(".world-time-button");
+    if (timeButton) {
+      const index = Number(event.target.closest(".world-clock-card").dataset.index);
+      openMenu = openMenu === `world-${index}` ? null : `world-${index}`;
+      render();
+      return;
+    }
+    const deleteButton = event.target.closest(".world-card-actions button");
+    if (deleteButton) {
+      const index = Number(event.target.closest(".world-clock-card").dataset.index);
+      worldClocks = worldClocks.filter((_, itemIndex) => itemIndex !== index);
+      openMenu = null;
+      savePreferences();
+      render();
+    }
+  });
+  $(".world-resize-handle").addEventListener("pointerdown", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const startX = event.clientX;
+    const startY = event.clientY;
+    const startScale = worldScale;
+    const onMove = (moveEvent) => {
+      const delta = (moveEvent.clientX - startX + moveEvent.clientY - startY) / 360;
+      worldScale = Math.min(1.45, Math.max(0.78, startScale + delta));
+      savePreferences();
+      render();
+    };
+    const onUp = () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+    };
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+  });
+  $(".preset-row").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-preset]");
+    if (!button) return;
+    if (button.dataset.preset === "custom") {
+      showCustomCountdown();
+      return;
+    }
+    const preset = countdownPresets.find((item) => item.id === button.dataset.preset);
+    if (preset) startPresetCountdown(preset.minutes);
+  });
+  $(".countdown-style-row").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-style]");
+    if (!button) return;
+    countdownStyle = button.dataset.style;
+    savePreferences();
+    render();
+  });
+  ["hours", "minutes", "seconds"].forEach((key) => {
+    $(`#custom${key[0].toUpperCase()}${key.slice(1)}`).addEventListener("input", (event) => {
+      customDuration[key] = sanitizeDurationValue(event.target.value, key);
+      savePreferences();
+      showCustomCountdown();
+    });
+  });
+  $(".start-button").addEventListener("click", startActiveCountdown);
+  $(".bottom-switch [data-action='now']").addEventListener("click", returnToNow);
+  $(".bottom-switch [data-action='countdown']").addEventListener("click", () => { mode = mode === "countdown" ? "home" : "countdown"; openMenu = null; render(); });
+  app.addEventListener("pointerdown", (event) => {
+    if (!event.target.closest("[data-interactive-panel]")) closePanels();
+  });
+  window.setInterval(() => { now = new Date(); render(); }, 250);
+  render();
+})();
   </script>
 </body>
 </html>

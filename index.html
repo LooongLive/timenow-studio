@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="zh-CN">
 <head>
@@ -13,7 +14,7 @@
     .ambient{position:absolute;border-radius:999px;filter:blur(34px);opacity:.46;pointer-events:none}.a1{width:34vw;height:34vw;left:-10vw;top:-11vw;background:var(--accent)}.a2{width:30vw;height:30vw;right:-8vw;bottom:-10vw;background:var(--accent-2)}
     .glass{border:1px solid var(--line);border-radius:8px;background:linear-gradient(140deg,var(--strong),transparent 120%),var(--glass);box-shadow:0 22px 70px var(--shadow);backdrop-filter:blur(28px) saturate(150%)}
     .hourglass{position:fixed;z-index:10;top:clamp(14px,2.3vw,28px);right:clamp(14px,2.3vw,28px);display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.07);box-shadow:0 12px 34px rgba(0,0,0,.18);color:var(--text);font-size:1rem;opacity:.62;backdrop-filter:blur(20px) saturate(145%)}.hourglass:hover{opacity:.92;background:rgba(255,255,255,.14)}
-    .settings{position:fixed;z-index:9;top:clamp(66px,7.8vw,82px);right:clamp(14px,2.3vw,28px);display:grid;gap:13px;width:min(340px,calc(100vw - 28px));padding:15px}.settings label{display:grid;gap:8px;color:var(--muted);font-size:.76rem;font-weight:740}
+    .settings{position:fixed;z-index:9;top:clamp(66px,7.8vw,82px);right:clamp(14px,2.3vw,28px);display:grid;gap:13px;width:min(430px,calc(100vw - 28px));padding:15px}.settings label{display:grid;gap:8px;color:var(--muted);font-size:.76rem;font-weight:740}
     input{min-width:0;height:36px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.12);color:var(--text);outline:none}input:not([type=range]){padding:0 11px}input[type=range]{width:100%;accent-color:var(--accent)}
     .select{position:relative}.trigger{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:46px;border:1px solid var(--line);border-radius:8px;background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.08)),rgba(255,255,255,.12);color:var(--text);padding:8px 11px;text-align:left;backdrop-filter:blur(22px) saturate(150%)}.trigger span{display:grid;gap:2px;min-width:0}.trigger small{color:var(--muted);font-size:.66rem;font-weight:740}.trigger strong{overflow:hidden;font-size:.92rem;font-weight:760;text-overflow:ellipsis;white-space:nowrap}.trigger i{display:grid;place-items:center;width:24px;height:24px;border-radius:999px;background:color-mix(in srgb,var(--accent) 22%,transparent);color:var(--accent);font-style:normal}
     .menu{position:absolute;z-index:20;top:calc(100% + 8px);left:0;right:0;display:grid;gap:6px;max-height:min(292px,42vh);overflow:auto;overscroll-behavior:contain;padding:8px;border:1px solid var(--line);border-radius:8px;background:linear-gradient(145deg,rgba(255,255,255,.28),rgba(255,255,255,.12)),color-mix(in srgb,var(--bg-b) 58%,transparent);box-shadow:0 22px 70px var(--shadow);backdrop-filter:blur(30px) saturate(170%);-webkit-overflow-scrolling:touch}.menu button{display:grid;gap:2px;min-height:42px;border:1px solid transparent;border-radius:8px;background:rgba(255,255,255,.08);color:var(--text);padding:8px 10px;text-align:left}.menu button:hover,.menu button.selected{border-color:color-mix(in srgb,var(--accent) 72%,var(--line));background:color-mix(in srgb,var(--accent) 24%,rgba(255,255,255,.14))}.menu span{overflow:hidden;font-size:.86rem;font-weight:760;text-overflow:ellipsis;white-space:nowrap}.menu small{overflow:hidden;color:var(--muted);font-size:.68rem;text-overflow:ellipsis;white-space:nowrap}
@@ -31,7 +32,7 @@
     <div class="ambient a1"></div><div class="ambient a2"></div>
     <button class="hourglass interactive" aria-label="打开显示设置">⌛</button>
     <aside class="settings glass interactive hidden">
-      <label>字号大小<input id="size" type="range" min="0.72" max="1.36" step="0.02" value="1"></label>
+      <label>字号大小<input id="size" type="range" min="0.58" max="1.85" step="0.02" value="1"></label>
       <div class="select" data-select="font"></div>
       <div class="theme-grid"></div>
     </aside>

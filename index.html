@@ -1372,6 +1372,8 @@ input[type="range"] {
     }).join("");
   }
   function renderWorldClocks() {
+    const activeMenu = openMenu?.startsWith("world") ? $(".world-time-menu:not(.hidden)") : null;
+    const activeMenuScrollTop = activeMenu?.scrollTop || 0;
     const shown = worldClocks.map((zone) => capitals.find((capital) => capital.zone === zone)).filter(Boolean);
     $(".world-add-control").classList.toggle("hidden", shown.length >= 3);
     $(".world-add-button").setAttribute("aria-expanded", openMenu === "world-add");
@@ -1390,6 +1392,12 @@ input[type="range"] {
         <div class="world-card-actions"><button aria-label="删除${capital.city}" type="button">×</button></div>
       </article>`;
     }).join("");
+    if (activeMenuScrollTop > 0) {
+      requestAnimationFrame(() => {
+        const restoredMenu = $(".world-time-menu:not(.hidden)");
+        if (restoredMenu) restoredMenu.scrollTop = activeMenuScrollTop;
+      });
+    }
   }
   function render() {
     const countdown = activeCountdown();

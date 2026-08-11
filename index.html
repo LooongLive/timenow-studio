@@ -48,6 +48,11 @@ input {
   --glass-strong: rgba(255, 255, 255, 0.22);
   --line: rgba(255, 255, 255, 0.22);
   --shadow: rgba(0, 0, 0, 0.34);
+  --motion-a: color-mix(in srgb, var(--accent) 46%, transparent);
+  --motion-b: color-mix(in srgb, var(--accent-2) 36%, transparent);
+  --motion-c: rgba(255, 255, 255, 0.18);
+  --pixel-font: "Courier New", Monaco, "Lucida Console", monospace;
+  --lcd-font: "Lucida Console", Monaco, "Courier New", monospace;
   position: relative;
   display: grid;
   place-items: center;
@@ -68,6 +73,9 @@ input {
   --bg-c: #5d6571;
   --accent: #d7e3f1;
   --accent-2: #8ea0b7;
+  --motion-a: rgba(215, 227, 241, 0.26);
+  --motion-b: rgba(142, 160, 183, 0.24);
+  --motion-c: rgba(255, 255, 255, 0.1);
 }
 
 .time-app[data-theme="alpine"] {
@@ -82,6 +90,9 @@ input {
   --glass-strong: rgba(255, 255, 255, 0.66);
   --line: rgba(20, 40, 65, 0.16);
   --shadow: rgba(70, 93, 120, 0.25);
+  --motion-a: rgba(11, 99, 206, 0.18);
+  --motion-b: rgba(8, 163, 168, 0.16);
+  --motion-c: rgba(255, 255, 255, 0.34);
 }
 
 .time-app[data-theme="cobalt"] {
@@ -90,6 +101,9 @@ input {
   --bg-c: #031f44;
   --accent: #39d5ff;
   --accent-2: #ffffff;
+  --motion-a: rgba(57, 213, 255, 0.34);
+  --motion-b: rgba(255, 255, 255, 0.16);
+  --motion-c: rgba(21, 83, 170, 0.22);
 }
 
 .time-app[data-theme="ember"] {
@@ -98,6 +112,9 @@ input {
   --bg-c: #ad6d20;
   --accent: #ffd36f;
   --accent-2: #ff7a59;
+  --motion-a: rgba(255, 211, 111, 0.25);
+  --motion-b: rgba(255, 122, 89, 0.26);
+  --motion-c: rgba(255, 245, 220, 0.12);
 }
 
 .time-app[data-theme="orchid"] {
@@ -106,6 +123,9 @@ input {
   --bg-c: #0b2851;
   --accent: #f49cff;
   --accent-2: #78e0ff;
+  --motion-a: rgba(244, 156, 255, 0.28);
+  --motion-b: rgba(120, 224, 255, 0.24);
+  --motion-c: rgba(255, 255, 255, 0.13);
 }
 
 .time-app[data-theme="mint"] {
@@ -114,6 +134,9 @@ input {
   --bg-c: #9bd6b0;
   --accent: #94ffe7;
   --accent-2: #eaffb7;
+  --motion-a: rgba(148, 255, 231, 0.24);
+  --motion-b: rgba(234, 255, 183, 0.2);
+  --motion-c: rgba(121, 205, 156, 0.18);
 }
 
 .time-app[data-theme="mono"] {
@@ -127,6 +150,9 @@ input {
   --glass: rgba(255, 255, 255, 0.58);
   --glass-strong: rgba(255, 255, 255, 0.75);
   --line: rgba(0, 0, 0, 0.16);
+  --motion-a: rgba(0, 0, 0, 0.1);
+  --motion-b: rgba(255, 255, 255, 0.28);
+  --motion-c: rgba(120, 120, 120, 0.12);
 }
 
 .time-app[data-theme="midnight"] {
@@ -135,6 +161,9 @@ input {
   --bg-c: #22304d;
   --accent: #7dd3fc;
   --accent-2: #c4b5fd;
+  --motion-a: rgba(125, 211, 252, 0.2);
+  --motion-b: rgba(196, 181, 253, 0.2);
+  --motion-c: rgba(255, 255, 255, 0.08);
 }
 
 .time-app[data-theme="rose"] {
@@ -143,6 +172,9 @@ input {
   --bg-c: #d7a295;
   --accent: #ffd0dc;
   --accent-2: #ffb86c;
+  --motion-a: rgba(255, 208, 220, 0.24);
+  --motion-b: rgba(255, 184, 108, 0.2);
+  --motion-c: rgba(255, 255, 255, 0.12);
 }
 
 .time-app[data-theme="solar"] {
@@ -151,6 +183,9 @@ input {
   --bg-c: #e9a92f;
   --accent: #fff4a8;
   --accent-2: #45ffd0;
+  --motion-a: rgba(255, 244, 168, 0.2);
+  --motion-b: rgba(69, 255, 208, 0.2);
+  --motion-c: rgba(255, 186, 74, 0.16);
 }
 
 .time-app[data-theme="ocean"] {
@@ -159,6 +194,111 @@ input {
   --bg-c: #1e8b98;
   --accent: #85f3ff;
   --accent-2: #b3f5c8;
+  --motion-a: rgba(133, 243, 255, 0.22);
+  --motion-b: rgba(179, 245, 200, 0.18);
+  --motion-c: rgba(35, 120, 170, 0.18);
+}
+
+.time-app[data-theme="pixel"] {
+  --bg-a: #05040a;
+  --bg-b: #15132b;
+  --bg-c: #0a302c;
+  --accent: #7cff6b;
+  --accent-2: #58e0ff;
+  --text: #f4ffe8;
+  --muted: rgba(244, 255, 232, 0.62);
+  --glass: rgba(20, 255, 142, 0.08);
+  --glass-strong: rgba(90, 224, 255, 0.16);
+  --line: rgba(124, 255, 107, 0.22);
+  --shadow: rgba(0, 0, 0, 0.42);
+  --motion-a: rgba(124, 255, 107, 0.22);
+  --motion-b: rgba(88, 224, 255, 0.18);
+  --motion-c: rgba(255, 255, 255, 0.1);
+  image-rendering: pixelated;
+}
+
+.time-app[data-theme="pixel"],
+.time-app[data-theme="pixel"] button,
+.time-app[data-theme="pixel"] input {
+  font-family: var(--pixel-font);
+}
+
+.time-app[data-theme="lcd"] {
+  --bg-a: #162f4d;
+  --bg-b: #4f8d55;
+  --bg-c: #6b4a2d;
+  --accent: #9dff63;
+  --accent-2: #7bd2ff;
+  --text: #f4ffe8;
+  --muted: rgba(244, 255, 232, 0.64);
+  --glass: rgba(60, 120, 70, 0.12);
+  --glass-strong: rgba(160, 255, 110, 0.16);
+  --line: rgba(173, 255, 112, 0.24);
+  --shadow: rgba(0, 0, 0, 0.48);
+  --motion-a: rgba(118, 255, 83, 0.22);
+  --motion-b: rgba(117, 82, 48, 0.18);
+  --motion-c: rgba(123, 210, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(123, 210, 255, 0.24), transparent 34%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.028) 0 18px, transparent 18px 36px),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.045) 0 18px, transparent 18px 36px),
+    linear-gradient(135deg, var(--bg-a) 0 35%, var(--bg-b) 35% 68%, var(--bg-c) 68% 100%);
+  image-rendering: pixelated;
+}
+
+.time-app[data-theme="lcd"],
+.time-app[data-theme="lcd"] button,
+.time-app[data-theme="lcd"] input {
+  font-family: var(--lcd-font);
+  text-transform: uppercase;
+}
+
+.time-app[data-theme="dotmatrix"] {
+  --bg-a: #02050c;
+  --bg-b: #061823;
+  --bg-c: #0d2f2b;
+  --accent: #75f4df;
+  --accent-2: #d6e889;
+  --text: #e9fff9;
+  --muted: rgba(233, 255, 249, 0.66);
+  --glass: rgba(117, 244, 223, 0.06);
+  --glass-strong: rgba(255, 255, 255, 0.13);
+  --line: rgba(117, 244, 223, 0.18);
+  --shadow: rgba(0, 0, 0, 0.48);
+  --motion-a: rgba(117, 244, 223, 0.2);
+  --motion-b: rgba(214, 232, 137, 0.14);
+  --motion-c: rgba(255, 255, 255, 0.12);
+  background:
+    radial-gradient(circle at 50% 30%, rgba(214, 232, 137, 0.18), transparent 22%),
+    radial-gradient(circle at 22% 56%, rgba(117, 244, 155, 0.13), transparent 24%),
+    radial-gradient(circle at 80% 60%, rgba(214, 232, 137, 0.12), transparent 22%),
+    radial-gradient(circle at 58% 44%, rgba(117, 244, 223, 0.12), transparent 24%),
+    linear-gradient(180deg, #02050c 0 48%, #03090f 48% 100%);
+  image-rendering: pixelated;
+}
+
+.time-app[data-theme="dotmatrix"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 36% 32%, rgba(255, 255, 255, 0.34) 0 1px, transparent 1.3px),
+    radial-gradient(circle at 50% 50%, rgba(117, 244, 223, 0.38) 0 3.7px, rgba(4, 12, 20, 0.84) 4.1px 6.8px, transparent 7.1px),
+    radial-gradient(circle at 50% 50%, rgba(214, 232, 137, 0.24) 0 3.7px, rgba(4, 12, 20, 0.84) 4.1px 6.8px, transparent 7.1px),
+    radial-gradient(circle at 50% 50%, rgba(85, 206, 126, 0.25) 0 3.7px, rgba(4, 12, 20, 0.84) 4.1px 6.8px, transparent 7.1px),
+    radial-gradient(circle at 50% 50%, rgba(5, 12, 22, 0.88) 0 3.7px, rgba(0, 0, 0, 0.92) 4.1px 6.8px, transparent 7.1px);
+  background-size: 15px 15px, 15px 15px, 15px 15px, 15px 15px, 15px 15px;
+  background-position: 0 0, 0 0, 5px 8px, 9px 2px, 11px 11px;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.time-app[data-theme="dotmatrix"],
+.time-app[data-theme="dotmatrix"] button,
+.time-app[data-theme="dotmatrix"] input {
+  font-family: var(--pixel-font);
 }
 
 .time-app.is-countdown-done {
@@ -188,6 +328,13 @@ input {
   filter: blur(34px);
   opacity: 0.46;
   pointer-events: none;
+  will-change: transform, width, height;
+  transition: opacity 3600ms ease, filter 3600ms ease;
+}
+
+.time-app.is-ambient-refreshing .ambient {
+  opacity: 0.035;
+  filter: blur(54px) saturate(0.72);
 }
 
 .ambient-one {
@@ -204,6 +351,175 @@ input {
   right: -8vw;
   bottom: -10vw;
   background: var(--accent-2);
+}
+
+.motion-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.74;
+  mix-blend-mode: screen;
+  transition: opacity 4200ms ease, filter 4200ms ease;
+}
+
+.motion-field.is-refreshing {
+  opacity: 0.025;
+  filter: blur(26px) saturate(0.72);
+}
+
+.motion-shape {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  min-width: 88px;
+  min-height: 88px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 34% 28%, var(--motion-c), transparent 22%),
+    linear-gradient(145deg, var(--motion-a), var(--motion-b));
+  filter: blur(24px) saturate(125%);
+  opacity: 0.46;
+  will-change: transform;
+}
+
+.motion-shape-2,
+.motion-shape-5 {
+  border-radius: 36% 64% 58% 42% / 46% 32% 68% 54%;
+  filter: blur(28px) saturate(135%);
+}
+
+.motion-shape-3 {
+  border-radius: 8px;
+  filter: blur(30px) saturate(120%);
+  transform-origin: center;
+}
+
+.motion-shape-4 {
+  border-radius: 52% 48% 38% 62% / 42% 56% 44% 58%;
+  background:
+    conic-gradient(from 120deg, var(--motion-a), var(--motion-c), var(--motion-b), var(--motion-a));
+  opacity: 0.34;
+}
+
+.motion-shape-6 {
+  border-radius: 999px 999px 42% 58%;
+  opacity: 0.28;
+}
+
+.time-app[data-theme="graphite"] .motion-shape,
+.time-app[data-theme="mono"] .motion-shape {
+  mix-blend-mode: multiply;
+}
+
+.time-app[data-theme="cobalt"] .motion-shape-3,
+.time-app[data-theme="midnight"] .motion-shape-3 {
+  border-radius: 4px;
+  opacity: 0.28;
+}
+
+.time-app[data-theme="ember"] .motion-shape,
+.time-app[data-theme="solar"] .motion-shape {
+  filter: blur(30px) saturate(150%);
+}
+
+.time-app[data-theme="pixel"] .motion-field {
+  opacity: 0.72;
+}
+
+.time-app[data-theme="pixel"] .motion-shape {
+  border-radius: 6px;
+  background:
+    linear-gradient(90deg, transparent 0 16%, var(--motion-a) 16% 34%, transparent 34% 52%, var(--motion-b) 52% 74%, transparent 74%),
+    linear-gradient(0deg, transparent 0 18%, var(--motion-c) 18% 34%, transparent 34% 58%, var(--motion-a) 58% 76%, transparent 76%);
+  filter: blur(18px) saturate(145%);
+  opacity: 0.42;
+}
+
+.time-app[data-theme="pixel"] .motion-shape-2,
+.time-app[data-theme="pixel"] .motion-shape-4,
+.time-app[data-theme="pixel"] .motion-shape-6 {
+  border-radius: 2px;
+  transform-origin: center;
+}
+
+.time-app[data-theme="lcd"] .motion-field {
+  opacity: 0.66;
+  mix-blend-mode: normal;
+}
+
+.time-app[data-theme="lcd"] .motion-shape {
+  border-radius: 4px;
+  background:
+    linear-gradient(180deg, rgba(157, 255, 99, 0.48) 0 28%, rgba(78, 151, 70, 0.42) 28% 46%, rgba(112, 77, 44, 0.34) 46% 100%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.11) 0 10px, transparent 10px 22px),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.12) 0 10px, transparent 10px 22px);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.06),
+    inset 0 -18px 0 rgba(80, 53, 35, 0.12);
+  filter: blur(14px) saturate(126%);
+  opacity: 0.4;
+}
+
+.time-app[data-theme="lcd"] .motion-shape-2,
+.time-app[data-theme="lcd"] .motion-shape-5 {
+  border-radius: 2px;
+  background:
+    linear-gradient(135deg, rgba(112, 84, 54, 0.34), rgba(84, 54, 36, 0.24)),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0 12px, transparent 12px 24px),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.12) 0 12px, transparent 12px 24px);
+}
+
+.time-app[data-theme="lcd"] .motion-shape-3,
+.time-app[data-theme="lcd"] .motion-shape-6 {
+  border-radius: 3px;
+  background:
+    linear-gradient(135deg, rgba(123, 210, 255, 0.32), rgba(157, 255, 99, 0.22)),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.13) 0 9px, transparent 9px 18px),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0 9px, transparent 9px 18px);
+  filter: blur(17px) saturate(125%);
+}
+
+.time-app[data-theme="dotmatrix"] .motion-field {
+  opacity: 0.32;
+  mix-blend-mode: screen;
+}
+
+.time-app[data-theme="dotmatrix"] .motion-shape {
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 36% 32%, rgba(255, 255, 255, 0.48) 0 1.1px, transparent 1.4px),
+    radial-gradient(circle, rgba(117, 244, 223, 0.32) 0 3.8px, transparent 4.4px),
+    radial-gradient(circle at 48% 52%, rgba(214, 232, 137, 0.13), transparent 64%);
+  background-size: 14px 14px, 14px 14px, 100% 100%;
+  filter: blur(13px) saturate(128%);
+  opacity: 0.28;
+}
+
+.time-app[data-theme="dotmatrix"] .motion-shape-2,
+.time-app[data-theme="dotmatrix"] .motion-shape-5 {
+  border-radius: 28% 72% 42% 58% / 62% 38% 62% 38%;
+}
+
+.time-app[data-theme="dotmatrix"] .motion-shape-3,
+.time-app[data-theme="dotmatrix"] .motion-shape-6 {
+  background:
+    radial-gradient(circle at 36% 32%, rgba(255, 255, 255, 0.42) 0 1px, transparent 1.3px),
+    radial-gradient(circle, rgba(214, 232, 137, 0.28) 0 3.6px, transparent 4.2px),
+    radial-gradient(circle at 42% 48%, rgba(117, 244, 223, 0.18), transparent 62%);
+  background-size: 13px 13px, 13px 13px, 100% 100%;
+}
+
+.time-app[data-theme="alpine"] .motion-field,
+.time-app[data-theme="mono"] .motion-field {
+  mix-blend-mode: normal;
+  opacity: 0.58;
+}
+
+.time-app.is-countdown-done .motion-field {
+  opacity: 0.34;
 }
 
 .glass-panel {
@@ -272,6 +588,37 @@ input {
   color: var(--muted);
   font-size: 0.76rem;
   font-weight: 740;
+}
+
+.settings-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 42px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 740;
+}
+
+.settings-toggle button {
+  min-width: 78px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+  font-size: 0.74rem;
+  font-weight: 800;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.settings-toggle button:hover,
+.settings-toggle button.active {
+  border-color: color-mix(in srgb, var(--accent) 68%, var(--line));
+  background: color-mix(in srgb, var(--accent) 18%, rgba(255, 255, 255, 0.08));
+  color: var(--text);
+  transform: translateY(-1px);
 }
 
 input {
@@ -511,6 +858,201 @@ input[type="range"] {
   line-height: 0.88;
   text-shadow: 0 0 46px color-mix(in srgb, var(--accent) 35%, transparent);
   white-space: nowrap;
+}
+
+.time-app[data-theme="pixel"] .main-time {
+  font-family: var(--pixel-font);
+  font-weight: 900;
+  text-shadow:
+    0 0 20px color-mix(in srgb, var(--accent) 42%, transparent),
+    4px 4px 0 rgba(0, 0, 0, 0.22);
+}
+
+.time-app[data-theme="pixel"] .date-line,
+.time-app[data-theme="pixel"] .world-time-button time,
+.time-app[data-theme="pixel"] .countdown-face time {
+  font-family: var(--pixel-font);
+}
+
+.time-app[data-theme="lcd"] .main-time,
+.time-app[data-theme="lcd"] .date-line,
+.time-app[data-theme="lcd"] .world-time-button,
+.time-app[data-theme="lcd"] .world-clock-place,
+.time-app[data-theme="lcd"] .bottom-switch button,
+.time-app[data-theme="lcd"] .settings-popover,
+.time-app[data-theme="lcd"] .mode-panel {
+  font-family: var(--lcd-font);
+  text-transform: uppercase;
+}
+
+.time-app[data-theme="lcd"] .main-time {
+  color: var(--text);
+  background:
+    repeating-linear-gradient(90deg, rgba(157, 255, 99, 0.95) 0 8px, rgba(244, 255, 232, 0.95) 8px 14px, transparent 14px 17px),
+    repeating-linear-gradient(0deg, rgba(123, 210, 255, 0.48) 0 7px, transparent 7px 16px);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter:
+    drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 28%, transparent))
+    drop-shadow(5px 5px 0 rgba(52, 35, 24, 0.38));
+  font-weight: 900;
+  text-shadow:
+    2px 0 0 rgba(157, 255, 99, 0.16),
+    0 2px 0 rgba(123, 210, 255, 0.12);
+}
+
+.time-app[data-theme="lcd"] .date-line,
+.time-app[data-theme="lcd"] .world-time-button time,
+.time-app[data-theme="lcd"] .world-clock-place span,
+.time-app[data-theme="lcd"] .world-clock-place small,
+.time-app[data-theme="lcd"] .bottom-switch button,
+.time-app[data-theme="lcd"] .settings-popover {
+  text-shadow:
+    2px 0 0 color-mix(in srgb, var(--accent) 32%, transparent),
+    0 2px 0 rgba(68, 44, 28, 0.32);
+}
+
+.time-app[data-theme="lcd"] .world-time-button time,
+.time-app[data-theme="lcd"] .countdown-face time {
+  color: transparent;
+  background:
+    repeating-linear-gradient(90deg, var(--accent) 0 4px, transparent 4px 6px),
+    repeating-linear-gradient(0deg, var(--accent-2) 0 4px, transparent 4px 6px);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.time-app[data-theme="dotmatrix"] .main-time,
+.time-app[data-theme="dotmatrix"] .date-line,
+.time-app[data-theme="dotmatrix"] .bottom-switch button,
+.time-app[data-theme="dotmatrix"] .settings-popover,
+.time-app[data-theme="dotmatrix"] .mode-panel {
+  font-family: var(--pixel-font);
+}
+
+.time-app[data-theme="dotmatrix"] .main-time {
+  position: relative;
+  display: block;
+  width: 100vw;
+  height: calc(205px + 110px * var(--time-scale));
+  color: transparent;
+  filter: none;
+  line-height: 1;
+  text-shadow: none;
+}
+
+.dotmatrix-time-label {
+  opacity: 0;
+}
+
+.dotmatrix-time {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.dotmatrix-time-dot {
+  fill: var(--accent);
+  filter:
+    drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.48))
+    drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.48))
+    drop-shadow(0 0 2px rgba(117, 244, 223, 0.28));
+}
+
+.dotmatrix-time-dot-0 {
+  fill: #eafef6;
+}
+
+.dotmatrix-time-dot-1 {
+  fill: #75f4df;
+}
+
+.dotmatrix-time-dot-2 {
+  fill: #9ff1cf;
+}
+
+.dotmatrix-time-dot-3 {
+  fill: #d6e889;
+}
+
+.dotmatrix-time-dot-4 {
+  fill: #55ce7e;
+}
+
+.time-app[data-theme="dotmatrix"] .date-line {
+  position: relative;
+  z-index: 3;
+  width: min(620px, calc(100vw - 36px));
+  margin: calc(12px * var(--time-scale)) auto 0;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  transform: none;
+  text-shadow:
+    1px 0 0 rgba(67, 255, 227, 0.28),
+    0 1px 0 rgba(255, 240, 107, 0.18),
+    0 0 12px rgba(67, 255, 227, 0.22);
+}
+
+.time-app[data-theme="dotmatrix"] .bottom-switch {
+  opacity: 0.62;
+}
+
+.time-app[data-theme="dotmatrix"] .bottom-switch:hover {
+  opacity: 0.88;
+}
+
+.time-app[data-theme="dotmatrix"] .bottom-switch button,
+.time-app[data-theme="dotmatrix"] .settings-popover,
+.time-app[data-theme="dotmatrix"] .mode-panel {
+  background:
+    linear-gradient(140deg, rgba(2, 8, 18, 0.48), rgba(9, 44, 58, 0.26)),
+    radial-gradient(circle, rgba(117, 244, 223, 0.1) 0 2px, transparent 2.4px) 0 0 / 15px 15px;
+  border-color: rgba(236, 255, 248, 0.16);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
+}
+
+.time-app[data-theme="dotmatrix"] .world-clock-card {
+  background:
+    linear-gradient(140deg, rgba(2, 8, 18, 0.46), rgba(8, 28, 44, 0.28)),
+    rgba(255, 255, 255, 0.025);
+  border-color: rgba(236, 255, 248, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 10px 26px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(22px) saturate(160%);
+}
+
+.time-app[data-theme="dotmatrix"] .world-dock {
+  opacity: 0.68;
+}
+
+.time-app[data-theme="dotmatrix"] .world-dock:hover {
+  opacity: 0.9;
+}
+
+.time-app[data-theme="dotmatrix"] .world-time-button time {
+  color: rgba(223, 254, 246, 0.82);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-weight: 900;
+  text-shadow:
+    0 0 8px rgba(67, 255, 227, 0.18),
+    0 1px 0 rgba(0, 0, 0, 0.44);
+}
+
+.time-app[data-theme="dotmatrix"] .world-clock-place span,
+.time-app[data-theme="dotmatrix"] .world-clock-place small {
+  color: rgba(242, 255, 249, 0.78);
+  font-family: var(--font-system);
+  font-weight: 820;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.72);
+}
+
+.time-app[data-theme="dotmatrix"] .world-clock-place small {
+  color: rgba(242, 255, 249, 0.56);
+  font-weight: 720;
 }
 
 .main-time-wrap.is-countdown .main-time {
@@ -826,14 +1368,16 @@ input[type="range"] {
 }
 
 .world-card-actions > button {
-  width: calc(25px * var(--world-scale, 1));
-  height: calc(25px * var(--world-scale, 1));
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.09);
-  color: var(--text);
-  font-size: calc(0.98rem * var(--world-scale, 1));
+  width: calc(23px * var(--world-scale, 1));
+  height: calc(23px * var(--world-scale, 1));
+  border: 1px solid color-mix(in srgb, var(--line) 42%, transparent);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.026);
+  color: color-mix(in srgb, var(--text) 36%, transparent);
+  font-size: calc(0.82rem * var(--world-scale, 1));
   line-height: 1;
+  opacity: 0.58;
+  transition: opacity 160ms ease, color 160ms ease, border-color 160ms ease, background 160ms ease;
 }
 
 .world-add-control .glass-select-trigger:hover {
@@ -895,8 +1439,10 @@ input[type="range"] {
 }
 
 .world-card-actions > button:hover {
-  border-color: color-mix(in srgb, #ff8fa3 70%, var(--line));
-  background: rgba(255, 143, 163, 0.18);
+  border-color: color-mix(in srgb, #ff8fa3 46%, var(--line));
+  background: rgba(255, 143, 163, 0.1);
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+  opacity: 0.9;
 }
 
 .world-resize-handle {
@@ -1065,26 +1611,33 @@ input[type="range"] {
   grid-template-columns: repeat(2, minmax(120px, 1fr));
   gap: 10px;
   width: min(420px, calc(100vw - 28px));
+  opacity: 0.64;
   transform: translateX(-50%);
+  transition: opacity 160ms ease;
+}
+
+.bottom-switch:hover {
+  opacity: 0.96;
 }
 
 .bottom-switch button {
   height: 52px;
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--line) 58%, transparent);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.13);
-  box-shadow: 0 18px 48px var(--shadow);
-  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--shadow) 42%, transparent);
+  color: color-mix(in srgb, var(--text) 62%, transparent);
   font-size: clamp(0.95rem, 1.5vw, 1.08rem);
   font-weight: 780;
-  backdrop-filter: blur(24px) saturate(160%);
-  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+  backdrop-filter: blur(22px) saturate(145%);
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, color 160ms ease;
 }
 
 .bottom-switch button:hover,
 .bottom-switch button.active {
   border-color: color-mix(in srgb, var(--accent) 78%, var(--line));
-  background: color-mix(in srgb, var(--accent) 24%, rgba(255, 255, 255, 0.14));
+  background: color-mix(in srgb, var(--accent) 15%, rgba(255, 255, 255, 0.08));
+  color: color-mix(in srgb, var(--text) 86%, transparent);
   transform: translateY(-2px);
 }
 
@@ -1177,11 +1730,13 @@ input[type="range"] {
   <main class="time-app" data-theme="aurora" style="--time-scale:1;--display-font:var(--font-system)">
     <div class="ambient ambient-one"></div>
     <div class="ambient ambient-two"></div>
+    <div class="motion-field" aria-hidden="true"><span class="motion-shape motion-shape-1"></span><span class="motion-shape motion-shape-2"></span><span class="motion-shape motion-shape-3"></span><span class="motion-shape motion-shape-4"></span><span class="motion-shape motion-shape-5"></span><span class="motion-shape motion-shape-6"></span><span class="motion-shape motion-shape-1"></span><span class="motion-shape motion-shape-2"></span><span class="motion-shape motion-shape-3"></span><span class="motion-shape motion-shape-4"></span><span class="motion-shape motion-shape-5"></span><span class="motion-shape motion-shape-6"></span></div>
     <button class="language-button" data-interactive-panel type="button" aria-label="切换为英文">EN</button>
     <button class="hourglass-button" data-interactive-panel type="button" aria-label="打开显示设置" aria-expanded="false">⌛</button>
     <aside class="settings-popover glass-panel hidden" data-interactive-panel aria-label="显示设置">
       <label>字号大小<input id="sizeControl" type="range" min="0.58" max="1.85" step="0.02" value="1"></label>
       <div class="glass-select" id="fontSelect"></div>
+      <div class="settings-toggle"><span>背景动画</span><button class="active" type="button" aria-pressed="true">开启</button></div>
       <div class="theme-grid" aria-label="风格预设"></div>
     </aside>
     <section class="clock-stage" aria-label="当前时间">
@@ -1267,7 +1822,7 @@ input[type="range"] {
     "Asia/Bangkok": { zh: ["泰国", "曼谷"], en: ["Thailand", "Bangkok"] },
     "Europe/Rome": { zh: ["意大利", "罗马"], en: ["Italy", "Rome"] },
   };
-  const themes = [["aurora",{zh:"极光玻璃",en:"Aurora Glass"}],["graphite",{zh:"石墨钛",en:"Graphite Titanium"}],["alpine",{zh:"雪岭白",en:"Alpine White"}],["cobalt",{zh:"钴蓝电弧",en:"Cobalt Arc"}],["ember",{zh:"日落熔金",en:"Solar Ember"}],["orchid",{zh:"兰紫霓虹",en:"Orchid Neon"}],["mint",{zh:"薄荷晶体",en:"Mint Crystal"}],["mono",{zh:"极简单色",en:"Minimal Mono"}],["midnight",{zh:"午夜航站",en:"Midnight Terminal"}],["rose",{zh:"玫瑰金",en:"Rose Gold"}],["solar",{zh:"太阳风",en:"Solar Wind"}],["ocean",{zh:"深海蓝",en:"Deep Ocean"}]];
+  const themes = [["aurora",{zh:"极光玻璃",en:"Aurora Glass"}],["graphite",{zh:"石墨钛",en:"Graphite Titanium"}],["alpine",{zh:"雪岭白",en:"Alpine White"}],["mint",{zh:"薄荷晶体",en:"Mint Crystal"}],["mono",{zh:"极简单色",en:"Minimal Mono"}],["midnight",{zh:"午夜航站",en:"Midnight Terminal"}],["pixel",{zh:"像素矩阵",en:"Pixel Matrix"}],["lcd",{zh:"方块世界",en:"Block World"}],["dotmatrix",{zh:"点阵霓屏",en:"Dot Matrix"}]];
   const fonts = [
     { label: { zh: "Apple 系统", en: "Apple System" }, value: "var(--font-system)" },
     { label: { zh: "Geist Sans", en: "Geist Sans" }, value: "var(--font-geist-sans)" },
@@ -1291,8 +1846,8 @@ input[type="range"] {
     { id: "crystal", label: { zh: "晶格", en: "Crystal" } },
   ];
   const copy = {
-    zh: { syncing:"正在同步本地时间", settings:"显示设置", openSettings:"打开显示设置", size:"字号大小", font:"字体", stylePresets:"风格预设", homeTime:"当前时间", homeWorld:"主页世界时间", addWorld:"添加世界时间", countdown:"倒计时", countdownPresets:"预设倒计时", countdownStyles:"倒计时显示风格", custom:"自定义", customCountdown:"自定义倒计时", hours:"小时", minutes:"分钟", seconds:"秒", start:"开始", done:"已经结束", remaining:"剩余时间", running:"倒计时进行中", elapsedPrefix:"结束后已过去", afterZero:"归零后会继续显示已过去时间", switcher:"时间功能切换", language:"切换为英文" },
-    en: { syncing:"Syncing local time", settings:"Display Settings", openSettings:"Open display settings", size:"Size", font:"Font", stylePresets:"Style Presets", homeTime:"Current Time", homeWorld:"Home World Times", addWorld:"Add World Time", countdown:"Countdown", countdownPresets:"Countdown Presets", countdownStyles:"Countdown Styles", custom:"Custom", customCountdown:"Custom Countdown", hours:"Hr", minutes:"Min", seconds:"Sec", start:"Start", done:"Ended", remaining:"Remaining", running:"Running", elapsedPrefix:"Elapsed", afterZero:"After zero, elapsed time keeps counting", switcher:"Time Mode Switcher", language:"Switch to Chinese" },
+    zh: { syncing:"正在同步本地时间", settings:"显示设置", openSettings:"打开显示设置", size:"字号大小", font:"字体", stylePresets:"风格预设", homeTime:"当前时间", homeWorld:"主页世界时间", addWorld:"添加世界时间", countdown:"倒计时", countdownPresets:"预设倒计时", countdownStyles:"倒计时显示风格", custom:"自定义", customCountdown:"自定义倒计时", hours:"小时", minutes:"分钟", seconds:"秒", start:"开始", done:"已经结束", remaining:"剩余时间", running:"倒计时进行中", elapsedPrefix:"结束后已过去", afterZero:"归零后会继续显示已过去时间", switcher:"时间功能切换", language:"切换为英文", animation:"背景动画", animationOn:"开启", animationOff:"关闭" },
+    en: { syncing:"Syncing local time", settings:"Display Settings", openSettings:"Open display settings", size:"Size", font:"Font", stylePresets:"Style Presets", homeTime:"Current Time", homeWorld:"Home World Times", addWorld:"Add World Time", countdown:"Countdown", countdownPresets:"Countdown Presets", countdownStyles:"Countdown Styles", custom:"Custom", customCountdown:"Custom Countdown", hours:"Hr", minutes:"Min", seconds:"Sec", start:"Start", done:"Ended", remaining:"Remaining", elapsedPrefix:"Elapsed", afterZero:"After zero, elapsed time keeps counting", switcher:"Time Mode Switcher", language:"Switch to Chinese", animation:"Background Motion", animationOn:"On", animationOff:"Off" },
   };
   const $ = (selector, root = document) => root.querySelector(selector);
   const app = $(".time-app");
@@ -1311,6 +1866,7 @@ input[type="range"] {
   let countdownStyle = "classic";
   let customDuration = { hours: "0", minutes: "45", seconds: "0" };
   let language = "zh";
+  let animationEnabled = true;
   const countdownStarts = {};
   let countdowns = [];
 
@@ -1383,6 +1939,71 @@ input[type="range"] {
     const clock = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
     return days > 0 ? (language === "en" ? `${days}d ${clock}` : `${days}天 ${clock}`) : clock;
   }
+  function dotMatrixTimeHtml(value) {
+    const viewport = { width: window.innerWidth || 1200, height: window.innerHeight || 800 };
+    const grid = 15;
+    const dotRadius = 3.7;
+    const visualScale = Math.max(0.72, Math.min(1.42, 0.66 + size * 0.42));
+    const glyphGap = 2;
+    const glyphWidth = 9;
+    const glyphHeight = 16;
+    const colonWidth = 2;
+    const segmentMap = {
+      "0": ["top", "upperLeft", "upperRight", "lowerLeft", "lowerRight", "bottom"],
+      "1": ["upperRight", "lowerRight"],
+      "2": ["top", "upperRight", "middle", "lowerLeft", "bottom"],
+      "3": ["top", "upperRight", "middle", "lowerRight", "bottom"],
+      "4": ["upperLeft", "upperRight", "middle", "lowerRight"],
+      "5": ["top", "upperLeft", "middle", "lowerRight", "bottom"],
+      "6": ["top", "upperLeft", "middle", "lowerLeft", "lowerRight", "bottom"],
+      "7": ["top", "upperRight", "lowerRight"],
+      "8": ["top", "upperLeft", "upperRight", "middle", "lowerLeft", "lowerRight", "bottom"],
+      "9": ["top", "upperLeft", "upperRight", "middle", "lowerRight", "bottom"],
+    };
+    const glyphCellWidth = (char) => (char === ":" ? colonWidth : glyphWidth);
+    const chars = Array.from(value).filter((char) => /[0-9:]/.test(char));
+    const rawWidth = chars.reduce((sum, char) => sum + glyphCellWidth(char) + glyphGap, -glyphGap);
+    const rawHeight = glyphHeight * visualScale;
+    const startGridX = Math.round((viewport.width / grid - rawWidth) / 2);
+    const startGridY = Math.round((viewport.height / grid - rawHeight) / 2) - 2;
+    const cells = [];
+    const hasCell = (x, y) => cells.some((item) => item.x === x && item.y === y);
+    const addCell = (x, y, charIndex) => {
+      if (!hasCell(x, y)) cells.push({ x, y, tone: (x + y + charIndex) % 5 });
+    };
+    const addHorizontal = (offsetX, y, charIndex) => {
+      for (let x = 1; x <= 7; x += 1) {
+        addCell(startGridX + offsetX + x, startGridY + y, charIndex);
+        addCell(startGridX + offsetX + x, startGridY + y + 1, charIndex);
+      }
+    };
+    const addVertical = (offsetX, x, yStart, yEnd, charIndex) => {
+      for (let y = yStart; y <= yEnd; y += 1) {
+        addCell(startGridX + offsetX + x, startGridY + y, charIndex);
+        addCell(startGridX + offsetX + x + 1, startGridY + y, charIndex);
+      }
+    };
+    chars.forEach((char, charIndex) => {
+      const offsetX = chars.slice(0, charIndex).reduce((sum, previous) => sum + glyphCellWidth(previous) + glyphGap, 0);
+      if (char === ":") {
+        [4, 5, 10, 11].forEach((y) => {
+          addCell(startGridX + offsetX, startGridY + y, charIndex);
+          addCell(startGridX + offsetX + 1, startGridY + y, charIndex);
+        });
+        return;
+      }
+      const segments = segmentMap[char] || [];
+      if (segments.includes("top")) addHorizontal(offsetX, 0, charIndex);
+      if (segments.includes("middle")) addHorizontal(offsetX, 7, charIndex);
+      if (segments.includes("bottom")) addHorizontal(offsetX, 14, charIndex);
+      if (segments.includes("upperLeft")) addVertical(offsetX, 0, 2, 6, charIndex);
+      if (segments.includes("upperRight")) addVertical(offsetX, 7, 2, 6, charIndex);
+      if (segments.includes("lowerLeft")) addVertical(offsetX, 0, 9, 13, charIndex);
+      if (segments.includes("lowerRight")) addVertical(offsetX, 7, 9, 13, charIndex);
+    });
+    const dots = cells.map((cell, index) => `<circle class="dotmatrix-time-dot dotmatrix-time-dot-${cell.tone}" cx="${cell.x * grid + grid / 2}" cy="${cell.y * grid + grid / 2}" r="${dotRadius}" key="${index}"></circle>`).join("");
+    return `<span class="dotmatrix-time-label">${value}</span><svg class="dotmatrix-time" viewBox="0 0 ${viewport.width} ${viewport.height}" preserveAspectRatio="none" aria-hidden="true"><g style="transform:translate(${viewport.width / 2}px, ${viewport.height / 2}px) scale(${visualScale}) translate(${-viewport.width / 2}px, ${-viewport.height / 2}px);transform-box:fill-box;transform-origin:center;transition:transform 180ms ease-out">${dots}</g></svg>`;
+  }
   function parseCustomDuration() {
     const hours = Math.max(0, parseInt(customDuration.hours, 10) || 0);
     const minutes = Math.max(0, parseInt(customDuration.minutes, 10) || 0);
@@ -1396,7 +2017,7 @@ input[type="range"] {
     return countdowns.find((item) => item.id === activeCountdownId) || countdowns[0];
   }
   function savePreferences() {
-    localStorage.setItem(preferencesKey, JSON.stringify({ theme, font, size, worldScale, worldClocks, countdownStyle, customDuration, language }));
+    localStorage.setItem(preferencesKey, JSON.stringify({ theme, font, size, worldScale, worldClocks, countdownStyle, customDuration, language, animationEnabled }));
   }
   function loadPreferences() {
     try {
@@ -1419,6 +2040,7 @@ input[type="range"] {
           seconds: sanitizeDurationValue(stored.customDuration.seconds, "seconds"),
         };
       }
+      if (typeof stored.animationEnabled === "boolean") animationEnabled = stored.animationEnabled;
     } catch {
       localStorage.removeItem(preferencesKey);
     }
@@ -1484,6 +2106,11 @@ input[type="range"] {
     $(".hourglass-button").setAttribute("aria-label", text().openSettings);
     $(".settings-popover").setAttribute("aria-label", text().settings);
     $(".settings-popover label").childNodes[0].textContent = text().size;
+    $(".settings-toggle span").textContent = text().animation;
+    $(".settings-toggle button").textContent = animationEnabled ? text().animationOn : text().animationOff;
+    $(".settings-toggle button").classList.toggle("active", animationEnabled);
+    $(".settings-toggle button").setAttribute("aria-pressed", animationEnabled ? "true" : "false");
+    $(".motion-field").classList.toggle("hidden", !animationEnabled);
     $(".theme-grid").setAttribute("aria-label", text().stylePresets);
     $(".clock-stage").setAttribute("aria-label", text().homeTime);
     $(".world-dock").setAttribute("aria-label", text().homeWorld);
@@ -1494,8 +2121,10 @@ input[type="range"] {
     $(".countdown-style-row").setAttribute("aria-label", text().countdownStyles);
     $(".custom-duration").setAttribute("aria-label", text().customCountdown);
     $(".bottom-switch").setAttribute("aria-label", text().switcher);
+    const mainTime = displayMode === "countdown" && countdownStarted ? (countdownDone ? formatDuration(Math.abs(countdownDelta)) : formatDuration(countdownDelta, true)) : now.toLocaleTimeString(language === "zh" ? "zh-CN" : "en-US", { hour12: false });
     $(".main-time-wrap").className = `main-time-wrap ${displayMode === "countdown" && countdownStarted ? `is-countdown countdown-${countdownStyle}` : ""}`;
-    $(".main-time").textContent = displayMode === "countdown" && countdownStarted ? (countdownDone ? formatDuration(Math.abs(countdownDelta)) : formatDuration(countdownDelta, true)) : now.toLocaleTimeString(language === "zh" ? "zh-CN" : "en-US", { hour12: false });
+    $(".main-time").classList.toggle("main-time-dotmatrix", theme === "dotmatrix");
+    $(".main-time").innerHTML = theme === "dotmatrix" ? dotMatrixTimeHtml(mainTime) : mainTime;
     $(".main-time").dateTime = now.toISOString();
     $(".date-line").textContent = displayMode === "countdown" && countdownStarted ? `${countdownLabel(countdown)} · ${countdownDone ? text().done : text().running}` : formatDateWithWeek(now);
     $(".countdown-progress").className = `countdown-progress countdown-progress-${countdownStyle} ${displayMode === "countdown" && countdownStarted ? "" : "hidden"}`;
@@ -1571,9 +2200,100 @@ input[type="range"] {
     openMenu = null;
     render();
   }
+  function startMotion() {
+    const particleCount = 12;
+    const motionElements = Array.from(document.querySelectorAll(".motion-shape"));
+    const ambientElements = Array.from(document.querySelectorAll(".ambient"));
+    const makeParticle = (index, scale = 1) => {
+      const viewportW = window.innerWidth;
+      const viewportH = window.innerHeight;
+      const sizeValue = Math.min(viewportW, viewportH) * scale * (0.1 + Math.random() * 0.16);
+      const angle = Math.random() * Math.PI * 2;
+      const speed = (16 + Math.random() * 28) / Math.sqrt(scale);
+      return {
+        x: Math.random() * Math.max(1, viewportW - sizeValue),
+        y: Math.random() * Math.max(1, viewportH - sizeValue),
+        vx: Math.cos(angle) * speed * (index % 3 === 0 ? 0.72 : 1),
+        vy: Math.sin(angle) * speed * (index % 4 === 0 ? 0.68 : 1),
+        size: sizeValue,
+      };
+    };
+    const particles = Array.from({ length: particleCount }, (_, index) => makeParticle(index));
+    const ambientParticles = [makeParticle(0, 2.1), makeParticle(1, 1.85)].map((item, index) => ({
+      ...item,
+      vx: item.vx * (0.34 + index * 0.08),
+      vy: item.vy * (0.34 + index * 0.08),
+    }));
+    let last = performance.now();
+    let lastRefreshBucket = -1;
+    let refreshTimeout = 0;
+    const resetParticle = (item, index, scale = 1) => {
+      const next = makeParticle(index, scale);
+      Object.assign(item, next);
+    };
+    const refreshParticles = () => {
+      $(".motion-field").classList.add("is-refreshing");
+      app.classList.add("is-ambient-refreshing");
+      clearTimeout(refreshTimeout);
+      refreshTimeout = window.setTimeout(() => {
+        particles.forEach((item, index) => resetParticle(item, index));
+        ambientParticles.forEach((item, index) => resetParticle(item, index, index === 0 ? 2.1 : 1.85));
+        window.setTimeout(() => {
+          $(".motion-field").classList.remove("is-refreshing");
+          app.classList.remove("is-ambient-refreshing");
+        }, 700);
+      }, 4300);
+    };
+    const moveParticle = (item, dt, width, height) => {
+      item.x += item.vx * dt;
+      item.y += item.vy * dt;
+      if (item.x <= -item.size * 0.12 || item.x + item.size >= width + item.size * 0.12) {
+        item.vx *= -1;
+        item.x = Math.min(width + item.size * 0.12 - item.size, Math.max(-item.size * 0.12, item.x));
+      }
+      if (item.y <= -item.size * 0.12 || item.y + item.size >= height + item.size * 0.12) {
+        item.vy *= -1;
+        item.y = Math.min(height + item.size * 0.12 - item.size, Math.max(-item.size * 0.12, item.y));
+      }
+    };
+    const tick = (time) => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const dt = Math.min(0.04, (time - last) / 1000);
+      last = time;
+      const second = new Date().getSeconds();
+      const refreshBucket = Math.floor(Date.now() / 10000);
+      if (animationEnabled && second % 10 === 0 && refreshBucket !== lastRefreshBucket) {
+        lastRefreshBucket = refreshBucket;
+        refreshParticles();
+      }
+      particles.forEach((item, index) => {
+        moveParticle(item, dt, width, height);
+        const element = motionElements[index];
+        if (element) {
+          element.style.width = `${item.size}px`;
+          element.style.height = `${item.size}px`;
+          element.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
+        }
+      });
+      ambientParticles.forEach((item, index) => {
+        const element = ambientElements[index];
+        const pulse = 1 + Math.sin(time / (3800 + index * 950) + index * 1.7) * 0.075;
+        moveParticle(item, dt, width, height);
+        if (element) {
+          element.style.width = `${item.size * pulse}px`;
+          element.style.height = `${item.size * pulse}px`;
+          element.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
+        }
+      });
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
 
   loadPreferences();
   makeCountdowns();
+  startMotion();
   $(".language-button").addEventListener("click", (event) => {
     event.stopPropagation();
     language = language === "zh" ? "en" : "zh";
@@ -1592,6 +2312,11 @@ input[type="range"] {
     const button = event.target.closest("[data-theme]");
     if (!button) return;
     theme = button.dataset.theme;
+    savePreferences();
+    render();
+  });
+  $(".settings-toggle button").addEventListener("click", () => {
+    animationEnabled = !animationEnabled;
     savePreferences();
     render();
   });

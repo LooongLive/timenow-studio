@@ -375,11 +375,6 @@ input {
   transition: opacity 3600ms ease, filter 3600ms ease;
 }
 
-.time-app.is-ambient-refreshing .ambient {
-  opacity: 0.035;
-  filter: blur(54px) saturate(0.72);
-}
-
 .ambient-one {
   width: 34vw;
   height: 34vw;
@@ -405,11 +400,6 @@ input {
   opacity: 0.74;
   mix-blend-mode: screen;
   transition: opacity 4200ms ease, filter 4200ms ease;
-}
-
-.motion-field.is-refreshing {
-  opacity: 0.025;
-  filter: blur(26px) saturate(0.72);
 }
 
 .motion-shape {
@@ -2399,25 +2389,30 @@ input[type="range"] {
     }));
     let last = performance.now();
     let lastRefreshBucket = -1;
-    let refreshTimeout = 0;
-    const resetParticle = (item, index, scale = 1) => {
+    const retargetParticle = (item, index, scale = 1) => {
       const next = makeParticle(index, scale);
-      Object.assign(item, next);
+      item.targetX = next.x;
+      item.targetY = next.y;
+      item.targetSize = next.size;
+      item.vx = (item.vx * 0.68 + next.vx * 0.32) * 0.92;
+      item.vy = (item.vy * 0.68 + next.vy * 0.32) * 0.92;
     };
     const refreshParticles = () => {
-      $(".motion-field").classList.add("is-refreshing");
-      app.classList.add("is-ambient-refreshing");
-      clearTimeout(refreshTimeout);
-      refreshTimeout = window.setTimeout(() => {
-        particles.forEach((item, index) => resetParticle(item, index));
-        ambientParticles.forEach((item, index) => resetParticle(item, index, index === 0 ? 2.1 : 1.85));
-        window.setTimeout(() => {
-          $(".motion-field").classList.remove("is-refreshing");
-          app.classList.remove("is-ambient-refreshing");
-        }, 700);
-      }, 4300);
+      particles.forEach((item, index) => retargetParticle(item, index));
+      ambientParticles.forEach((item, index) => retargetParticle(item, index, index === 0 ? 2.1 : 1.85));
     };
     const moveParticle = (item, dt, width, height) => {
+      if (typeof item.targetX === "number" && typeof item.targetY === "number" && typeof item.targetSize === "number") {
+        const ease = Math.min(0.026, dt * 0.22);
+        item.x += (item.targetX - item.x) * ease;
+        item.y += (item.targetY - item.y) * ease;
+        item.size += (item.targetSize - item.size) * ease;
+        if (Math.abs(item.targetX - item.x) < 0.8 && Math.abs(item.targetY - item.y) < 0.8 && Math.abs(item.targetSize - item.size) < 0.8) {
+          item.targetX = undefined;
+          item.targetY = undefined;
+          item.targetSize = undefined;
+        }
+      }
       item.x += item.vx * dt;
       item.y += item.vy * dt;
       if (item.x <= -item.size * 0.12 || item.x + item.size >= width + item.size * 0.12) {

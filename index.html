@@ -53,6 +53,7 @@ input {
   --motion-c: rgba(255, 255, 255, 0.18);
   --pixel-font: "Courier New", Monaco, "Lucida Console", monospace;
   --lcd-font: "Lucida Console", Monaco, "Courier New", monospace;
+  --ink-font: "HanziPen SC", "Xingkai SC", "Baoli SC", "Kaiti SC", "STKaiti", "KaiTi", "Songti SC", "Hiragino Mincho ProN", "Times New Roman", serif;
   position: relative;
   display: grid;
   place-items: center;
@@ -251,6 +252,48 @@ input {
 .time-app[data-theme="lcd"] input {
   font-family: var(--lcd-font);
   text-transform: uppercase;
+}
+
+.time-app[data-theme="ink"] {
+  --bg-a: #f3efe3;
+  --bg-b: #d8ddcf;
+  --bg-c: #6c837b;
+  --accent: #1b5f63;
+  --accent-2: #b94b38;
+  --text: #17201d;
+  --muted: rgba(23, 32, 29, 0.58);
+  --glass: rgba(255, 255, 255, 0.22);
+  --glass-strong: rgba(255, 255, 255, 0.38);
+  --line: rgba(33, 48, 42, 0.15);
+  --shadow: rgba(40, 48, 41, 0.24);
+  --motion-a: rgba(22, 56, 48, 0.16);
+  --motion-b: rgba(27, 95, 99, 0.13);
+  --motion-c: rgba(185, 75, 56, 0.1);
+  background:
+    radial-gradient(ellipse at 18% 20%, rgba(27, 95, 99, 0.16), transparent 34%),
+    radial-gradient(ellipse at 86% 68%, rgba(185, 75, 56, 0.12), transparent 32%),
+    radial-gradient(ellipse at 62% 36%, rgba(23, 32, 29, 0.08), transparent 26%),
+    linear-gradient(135deg, var(--bg-a), var(--bg-b) 52%, var(--bg-c));
+}
+
+.time-app[data-theme="ink"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(32, 41, 36, 0.022) 0 1px, transparent 1px 6px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 8px),
+    radial-gradient(circle at 22% 75%, rgba(255, 255, 255, 0.2), transparent 24%);
+  mix-blend-mode: multiply;
+  opacity: 0.54;
+  pointer-events: none;
+}
+
+.time-app[data-theme="ink"],
+.time-app[data-theme="ink"] button,
+.time-app[data-theme="ink"] input {
+  font-family: var(--ink-font);
 }
 
 .time-app[data-theme="dotmatrix"] {
@@ -482,6 +525,39 @@ input {
   filter: blur(17px) saturate(125%);
 }
 
+.time-app[data-theme="ink"] .motion-field {
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+
+.time-app[data-theme="ink"] .motion-shape {
+  border-radius: 45% 55% 60% 40% / 42% 50% 50% 58%;
+  background:
+    radial-gradient(ellipse at 34% 28%, rgba(255, 255, 255, 0.22), transparent 22%),
+    radial-gradient(ellipse at 54% 56%, var(--motion-a), transparent 58%),
+    radial-gradient(ellipse at 44% 42%, var(--motion-b), transparent 72%);
+  filter: blur(26px) saturate(90%);
+  opacity: 0.42;
+}
+
+.time-app[data-theme="ink"] .motion-shape-2,
+.time-app[data-theme="ink"] .motion-shape-5 {
+  background:
+    radial-gradient(ellipse at 44% 46%, rgba(23, 32, 29, 0.18), transparent 64%),
+    radial-gradient(ellipse at 58% 38%, var(--motion-c), transparent 72%);
+  filter: blur(30px) saturate(80%);
+  opacity: 0.34;
+}
+
+.time-app[data-theme="ink"] .motion-shape-3,
+.time-app[data-theme="ink"] .motion-shape-6 {
+  border-radius: 999px 46% 64% 52%;
+  background:
+    radial-gradient(ellipse at 42% 48%, rgba(27, 95, 99, 0.14), transparent 62%),
+    radial-gradient(ellipse at 62% 36%, rgba(255, 255, 255, 0.14), transparent 66%);
+  opacity: 0.28;
+}
+
 .time-app[data-theme="dotmatrix"] .motion-field {
   opacity: 0.32;
   mix-blend-mode: screen;
@@ -572,7 +648,7 @@ input {
 
 .settings-popover {
   position: fixed;
-  z-index: 9;
+  z-index: 40;
   top: clamp(66px, 7.8vw, 82px);
   right: clamp(14px, 2.3vw, 28px);
   display: grid;
@@ -580,6 +656,7 @@ input {
   width: min(430px, calc(100vw - 28px));
   max-height: calc(100vh - 166px);
   padding: 15px;
+  pointer-events: auto;
 }
 
 .settings-popover label {
@@ -761,21 +838,36 @@ input[type="range"] {
 }
 
 .theme-grid {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 7px;
+  gap: 8px;
+  pointer-events: auto;
 }
 
 .theme-grid button {
+  position: relative;
+  z-index: 1;
   overflow: hidden;
-  height: 32px;
+  min-height: 42px;
+  padding: 0 9px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.1);
   color: var(--text);
-  font-size: 0.72rem;
+  font-size: 0.76rem;
+  font-weight: 780;
   text-overflow: ellipsis;
+  touch-action: manipulation;
   white-space: nowrap;
+  transition: border-color 150ms ease, background 150ms ease, color 150ms ease, transform 150ms ease;
+}
+
+.theme-grid button:hover {
+  border-color: color-mix(in srgb, var(--accent) 62%, var(--line));
+  background: color-mix(in srgb, var(--accent) 18%, rgba(255, 255, 255, 0.12));
+  transform: translateY(-1px);
 }
 
 .theme-grid button.active {
@@ -858,6 +950,166 @@ input[type="range"] {
   line-height: 0.88;
   text-shadow: 0 0 46px color-mix(in srgb, var(--accent) 35%, transparent);
   white-space: nowrap;
+}
+
+.main-time-text {
+  display: inline-block;
+}
+
+.ink-filter-defs {
+  position: fixed;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.time-app[data-theme="ink"] .main-time {
+  color: #020302;
+  font-family: var(--ink-font);
+  font-weight: 950;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 0.018em rgba(0, 0, 0, 0.84);
+  text-shadow:
+    0.018em 0.026em 0 rgba(0, 0, 0, 0.18),
+    0 12px 34px rgba(32, 41, 36, 0.12);
+}
+
+.time-app[data-theme="ink"] .main-time-text {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.018em;
+}
+
+.ink-time-char,
+.ink-time-mark {
+  display: inline-grid;
+  place-items: center;
+  min-width: 0.6em;
+  text-align: center;
+}
+
+.ink-time-mark {
+  min-width: 0.28em;
+  color: rgba(23, 32, 29, 0.62);
+  transform: translateY(-0.02em);
+}
+
+.ink-time-char {
+  position: relative;
+  color: #010101;
+  filter:
+    url("#inkBrushStroke")
+    contrast(1.18)
+    drop-shadow(0.012em 0.018em 0 rgba(0, 0, 0, 0.14))
+    drop-shadow(0 0 0.018em rgba(18, 28, 24, 0.36));
+  transform-origin: center;
+  will-change: opacity, filter;
+}
+
+.ink-time-new,
+.ink-time-old {
+  grid-area: 1 / 1;
+  display: inline-block;
+}
+
+.ink-time-char.is-changing .ink-time-new {
+  animation: inkNewSettle 1320ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+
+.ink-time-char.is-changing .ink-time-old {
+  animation: inkOldLift 1320ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+
+.ink-time-char::before,
+.ink-time-char::after {
+  content: "";
+  position: absolute;
+  inset: 0.1em 0.06em;
+  border-radius: 46% 54% 42% 58% / 52% 38% 62% 48%;
+  background:
+    repeating-linear-gradient(112deg, rgba(255, 255, 255, 0.42) 0 0.012em, transparent 0.012em 0.046em),
+    radial-gradient(ellipse at 36% 30%, rgba(18, 28, 24, 0.18), transparent 24%),
+    radial-gradient(ellipse at 58% 60%, rgba(18, 28, 24, 0.13), transparent 42%);
+  mix-blend-mode: multiply;
+  opacity: 0.22;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.ink-time-char::before {
+  opacity: 0.14;
+  filter: blur(0.055em);
+}
+
+.ink-time-char::after {
+  inset: -0.02em 0.02em 0.02em;
+  background:
+    radial-gradient(ellipse at 28% 44%, rgba(255, 255, 255, 0.42), transparent 26%),
+    radial-gradient(ellipse at 58% 36%, rgba(23, 32, 29, 0.15), transparent 52%);
+  opacity: 0.07;
+  filter: blur(0.025em);
+}
+
+.time-app[data-theme="ink"] .date-line,
+.time-app[data-theme="ink"] .world-clock-place,
+.time-app[data-theme="ink"] .bottom-switch button,
+.time-app[data-theme="ink"] .settings-popover,
+.time-app[data-theme="ink"] .mode-panel {
+  font-family: var(--ink-font);
+}
+
+.time-app[data-theme="ink"] .date-line {
+  color: rgba(23, 32, 29, 0.58);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+.time-app[data-theme="ink"] .bottom-switch button,
+.time-app[data-theme="ink"] .settings-popover,
+.time-app[data-theme="ink"] .mode-panel,
+.time-app[data-theme="ink"] .world-clock-card {
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.12)),
+    rgba(245, 241, 228, 0.18);
+  border-color: rgba(33, 48, 42, 0.13);
+  box-shadow: 0 16px 38px rgba(40, 48, 41, 0.12);
+}
+
+@keyframes inkNewSettle {
+  0% {
+    opacity: 0;
+    filter:
+      url("#inkBrushStroke")
+      blur(0.032em)
+      contrast(0.92);
+  }
+
+  100% {
+    opacity: 1;
+    filter:
+      url("#inkBrushStroke")
+      blur(0)
+      contrast(1.18);
+  }
+}
+
+@keyframes inkOldLift {
+  0% {
+    opacity: 0.92;
+    filter:
+      url("#inkBrushStroke")
+      blur(0)
+      contrast(1.12);
+  }
+
+  100% {
+    opacity: 0;
+    filter:
+      url("#inkBrushStroke")
+      blur(0.036em)
+      contrast(0.82);
+  }
 }
 
 .time-app[data-theme="pixel"] .main-time {
@@ -1728,6 +1980,16 @@ input[type="range"] {
 </head>
 <body>
   <main class="time-app" data-theme="aurora" style="--time-scale:1;--display-font:var(--font-system)">
+    <svg class="ink-filter-defs" aria-hidden="true" focusable="false">
+      <filter id="inkBrushStroke" x="-18%" y="-22%" width="136%" height="144%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.018 0.11" numOctaves="3" seed="12" result="grain"></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="grain" scale="5.5" xChannelSelector="R" yChannelSelector="G" result="rough"></feDisplacementMap>
+        <feMorphology in="rough" operator="erode" radius="0.32" result="dry"></feMorphology>
+        <feTurbulence type="turbulence" baseFrequency="0.09 0.22" numOctaves="2" seed="27" result="breaks"></feTurbulence>
+        <feComposite in="dry" in2="breaks" operator="arithmetic" k1="0.88" k2="0.8" k3="-0.18" k4="0" result="broken"></feComposite>
+        <feColorMatrix in="broken" type="matrix" values="0 0 0 0 0.02 0 0 0 0 0.02 0 0 0 0 0.018 0 0 0 1.25 0"></feColorMatrix>
+      </filter>
+    </svg>
     <div class="ambient ambient-one"></div>
     <div class="ambient ambient-two"></div>
     <div class="motion-field" aria-hidden="true"><span class="motion-shape motion-shape-1"></span><span class="motion-shape motion-shape-2"></span><span class="motion-shape motion-shape-3"></span><span class="motion-shape motion-shape-4"></span><span class="motion-shape motion-shape-5"></span><span class="motion-shape motion-shape-6"></span><span class="motion-shape motion-shape-1"></span><span class="motion-shape motion-shape-2"></span><span class="motion-shape motion-shape-3"></span><span class="motion-shape motion-shape-4"></span><span class="motion-shape motion-shape-5"></span><span class="motion-shape motion-shape-6"></span></div>
@@ -1822,7 +2084,7 @@ input[type="range"] {
     "Asia/Bangkok": { zh: ["泰国", "曼谷"], en: ["Thailand", "Bangkok"] },
     "Europe/Rome": { zh: ["意大利", "罗马"], en: ["Italy", "Rome"] },
   };
-  const themes = [["aurora",{zh:"极光玻璃",en:"Aurora Glass"}],["graphite",{zh:"石墨钛",en:"Graphite Titanium"}],["alpine",{zh:"雪岭白",en:"Alpine White"}],["mint",{zh:"薄荷晶体",en:"Mint Crystal"}],["mono",{zh:"极简单色",en:"Minimal Mono"}],["midnight",{zh:"午夜航站",en:"Midnight Terminal"}],["pixel",{zh:"像素矩阵",en:"Pixel Matrix"}],["lcd",{zh:"方块世界",en:"Block World"}],["dotmatrix",{zh:"点阵霓屏",en:"Dot Matrix"}]];
+  const themes = [["aurora",{zh:"极光玻璃",en:"Aurora Glass"}],["graphite",{zh:"石墨钛",en:"Graphite Titanium"}],["alpine",{zh:"雪岭白",en:"Alpine White"}],["mint",{zh:"薄荷晶体",en:"Mint Crystal"}],["mono",{zh:"极简单色",en:"Minimal Mono"}],["midnight",{zh:"午夜航站",en:"Midnight Terminal"}],["pixel",{zh:"像素矩阵",en:"Pixel Matrix"}],["lcd",{zh:"方块世界",en:"Block World"}],["ink",{zh:"水墨行云",en:"Ink Wash"}]];
   const fonts = [
     { label: { zh: "Apple 系统", en: "Apple System" }, value: "var(--font-system)" },
     { label: { zh: "Geist Sans", en: "Geist Sans" }, value: "var(--font-geist-sans)" },
@@ -1867,6 +2129,8 @@ input[type="range"] {
   let customDuration = { hours: "0", minutes: "45", seconds: "0" };
   let language = "zh";
   let animationEnabled = true;
+  let lastMainTimeValue = "";
+  let lastMainTimeHtml = "";
   const countdownStarts = {};
   let countdowns = [];
 
@@ -2004,6 +2268,12 @@ input[type="range"] {
     const dots = cells.map((cell, index) => `<circle class="dotmatrix-time-dot dotmatrix-time-dot-${cell.tone}" cx="${cell.x * grid + grid / 2}" cy="${cell.y * grid + grid / 2}" r="${dotRadius}" key="${index}"></circle>`).join("");
     return `<span class="dotmatrix-time-label">${value}</span><svg class="dotmatrix-time" viewBox="0 0 ${viewport.width} ${viewport.height}" preserveAspectRatio="none" aria-hidden="true"><g style="transform:translate(${viewport.width / 2}px, ${viewport.height / 2}px) scale(${visualScale}) translate(${-viewport.width / 2}px, ${-viewport.height / 2}px);transform-box:fill-box;transform-origin:center;transition:transform 180ms ease-out">${dots}</g></svg>`;
   }
+  function inkCharHtml(char, index, previousChar = char) {
+    const changed = previousChar !== char && char !== ":";
+    return char === ":"
+      ? `<span class="ink-time-mark" data-char="${char}" aria-hidden="true">${char}</span>`
+      : `<span class="ink-time-char ${changed ? "is-changing" : ""}" data-char="${char}" aria-hidden="true">${changed ? `<span class="ink-time-old">${previousChar}</span>` : ""}<span class="ink-time-new">${char}</span></span>`;
+  }
   function parseCustomDuration() {
     const hours = Math.max(0, parseInt(customDuration.hours, 10) || 0);
     const minutes = Math.max(0, parseInt(customDuration.minutes, 10) || 0);
@@ -2124,8 +2394,33 @@ input[type="range"] {
     const mainTime = displayMode === "countdown" && countdownStarted ? (countdownDone ? formatDuration(Math.abs(countdownDelta)) : formatDuration(countdownDelta, true)) : now.toLocaleTimeString(language === "zh" ? "zh-CN" : "en-US", { hour12: false });
     $(".main-time-wrap").className = `main-time-wrap ${displayMode === "countdown" && countdownStarted ? `is-countdown countdown-${countdownStyle}` : ""}`;
     $(".main-time").classList.toggle("main-time-dotmatrix", theme === "dotmatrix");
-    $(".main-time").innerHTML = theme === "dotmatrix" ? dotMatrixTimeHtml(mainTime) : mainTime;
-    $(".main-time").dateTime = now.toISOString();
+    const mainTimeElement = $(".main-time");
+    if (theme === "ink") {
+      let inkText = mainTimeElement.querySelector(".ink-time-text");
+      const chars = Array.from(mainTime);
+      if (!inkText || inkText.children.length !== chars.length) {
+        mainTimeElement.innerHTML = `<span class="main-time-text ink-time-text" aria-label="${mainTime}">${chars.map(inkCharHtml).join("")}</span>`;
+        inkText = mainTimeElement.querySelector(".ink-time-text");
+      } else {
+        inkText.setAttribute("aria-label", mainTime);
+        chars.forEach((char, index) => {
+          const child = inkText.children[index];
+          if (child?.getAttribute("data-char") !== char) {
+            child.outerHTML = inkCharHtml(char, index, child?.getAttribute("data-char") || char);
+          }
+        });
+      }
+      lastMainTimeValue = mainTime;
+      lastMainTimeHtml = "";
+    } else {
+      const nextMainTimeHtml = theme === "dotmatrix" ? dotMatrixTimeHtml(mainTime) : `<span class="main-time-text">${mainTime}</span>`;
+      if (nextMainTimeHtml !== lastMainTimeHtml) {
+        mainTimeElement.innerHTML = nextMainTimeHtml;
+        lastMainTimeHtml = nextMainTimeHtml;
+      }
+      lastMainTimeValue = "";
+    }
+    mainTimeElement.dateTime = now.toISOString();
     $(".date-line").textContent = displayMode === "countdown" && countdownStarted ? `${countdownLabel(countdown)} · ${countdownDone ? text().done : text().running}` : formatDateWithWeek(now);
     $(".countdown-progress").className = `countdown-progress countdown-progress-${countdownStyle} ${displayMode === "countdown" && countdownStarted ? "" : "hidden"}`;
     $(".countdown-progress span").style.transform = `scaleX(${progress})`;
@@ -2312,6 +2607,7 @@ input[type="range"] {
     const button = event.target.closest("[data-theme]");
     if (!button) return;
     theme = button.dataset.theme;
+    openMenu = null;
     savePreferences();
     render();
   });

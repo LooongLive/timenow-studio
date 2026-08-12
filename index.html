@@ -956,14 +956,6 @@ input[type="range"] {
   display: inline-block;
 }
 
-.ink-filter-defs {
-  position: fixed;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
 .time-app[data-theme="ink"] .main-time {
   color: #020302;
   font-family: var(--ink-font);
@@ -980,6 +972,7 @@ input[type="range"] {
   align-items: baseline;
   justify-content: center;
   gap: 0.018em;
+  isolation: isolate;
 }
 
 .ink-time-char,
@@ -987,11 +980,13 @@ input[type="range"] {
   display: inline-grid;
   place-items: center;
   min-width: 0.6em;
+  width: 0.6em;
   text-align: center;
 }
 
 .ink-time-mark {
   min-width: 0.28em;
+  width: 0.28em;
   color: rgba(23, 32, 29, 0.62);
   transform: translateY(-0.02em);
 }
@@ -1000,7 +995,6 @@ input[type="range"] {
   position: relative;
   color: #010101;
   filter:
-    url("#inkBrushStroke")
     contrast(1.18)
     drop-shadow(0.012em 0.018em 0 rgba(0, 0, 0, 0.14))
     drop-shadow(0 0 0.018em rgba(18, 28, 24, 0.36));
@@ -1012,6 +1006,7 @@ input[type="range"] {
 .ink-time-old {
   grid-area: 1 / 1;
   display: inline-block;
+  width: 100%;
 }
 
 .ink-time-char.is-changing .ink-time-new {
@@ -1029,10 +1024,10 @@ input[type="range"] {
   inset: 0.1em 0.06em;
   border-radius: 46% 54% 42% 58% / 52% 38% 62% 48%;
   background:
-    repeating-linear-gradient(112deg, rgba(255, 255, 255, 0.42) 0 0.012em, transparent 0.012em 0.046em),
-    radial-gradient(ellipse at 36% 30%, rgba(18, 28, 24, 0.18), transparent 24%),
-    radial-gradient(ellipse at 58% 60%, rgba(18, 28, 24, 0.13), transparent 42%);
-  mix-blend-mode: multiply;
+    repeating-linear-gradient(112deg, rgba(244, 241, 230, 0.7) 0 0.012em, transparent 0.012em 0.05em),
+    radial-gradient(ellipse at 34% 24%, rgba(244, 241, 230, 0.58), transparent 18%),
+    radial-gradient(ellipse at 64% 62%, rgba(0, 0, 0, 0.12), transparent 38%);
+  mix-blend-mode: screen;
   opacity: 0.22;
   pointer-events: none;
   will-change: opacity, transform;
@@ -1046,8 +1041,8 @@ input[type="range"] {
 .ink-time-char::after {
   inset: -0.02em 0.02em 0.02em;
   background:
-    radial-gradient(ellipse at 28% 44%, rgba(255, 255, 255, 0.42), transparent 26%),
-    radial-gradient(ellipse at 58% 36%, rgba(23, 32, 29, 0.15), transparent 52%);
+    radial-gradient(ellipse at 28% 44%, rgba(244, 241, 230, 0.5), transparent 24%),
+    radial-gradient(ellipse at 58% 36%, rgba(23, 32, 29, 0.12), transparent 52%);
   opacity: 0.07;
   filter: blur(0.025em);
 }
@@ -1080,7 +1075,6 @@ input[type="range"] {
   0% {
     opacity: 0;
     filter:
-      url("#inkBrushStroke")
       blur(0.032em)
       contrast(0.92);
   }
@@ -1088,7 +1082,6 @@ input[type="range"] {
   100% {
     opacity: 1;
     filter:
-      url("#inkBrushStroke")
       blur(0)
       contrast(1.18);
   }
@@ -1098,7 +1091,6 @@ input[type="range"] {
   0% {
     opacity: 0.92;
     filter:
-      url("#inkBrushStroke")
       blur(0)
       contrast(1.12);
   }
@@ -1106,7 +1098,6 @@ input[type="range"] {
   100% {
     opacity: 0;
     filter:
-      url("#inkBrushStroke")
       blur(0.036em)
       contrast(0.82);
   }
@@ -1980,16 +1971,6 @@ input[type="range"] {
 </head>
 <body>
   <main class="time-app" data-theme="aurora" style="--time-scale:1;--display-font:var(--font-system)">
-    <svg class="ink-filter-defs" aria-hidden="true" focusable="false">
-      <filter id="inkBrushStroke" x="-18%" y="-22%" width="136%" height="144%" color-interpolation-filters="sRGB">
-        <feTurbulence type="fractalNoise" baseFrequency="0.018 0.11" numOctaves="3" seed="12" result="grain"></feTurbulence>
-        <feDisplacementMap in="SourceGraphic" in2="grain" scale="5.5" xChannelSelector="R" yChannelSelector="G" result="rough"></feDisplacementMap>
-        <feMorphology in="rough" operator="erode" radius="0.32" result="dry"></feMorphology>
-        <feTurbulence type="turbulence" baseFrequency="0.09 0.22" numOctaves="2" seed="27" result="breaks"></feTurbulence>
-        <feComposite in="dry" in2="breaks" operator="arithmetic" k1="0.88" k2="0.8" k3="-0.18" k4="0" result="broken"></feComposite>
-        <feColorMatrix in="broken" type="matrix" values="0 0 0 0 0.02 0 0 0 0 0.02 0 0 0 0 0.018 0 0 0 1.25 0"></feColorMatrix>
-      </filter>
-    </svg>
     <div class="ambient ambient-one"></div>
     <div class="ambient ambient-two"></div>
     <div class="motion-field" aria-hidden="true"><span class="motion-shape motion-shape-1"></span><span class="motion-shape motion-shape-2"></span><span class="motion-shape motion-shape-3"></span><span class="motion-shape motion-shape-4"></span><span class="motion-shape motion-shape-5"></span><span class="motion-shape motion-shape-6"></span><span class="motion-shape motion-shape-1"></span><span class="motion-shape motion-shape-2"></span><span class="motion-shape motion-shape-3"></span><span class="motion-shape motion-shape-4"></span><span class="motion-shape motion-shape-5"></span><span class="motion-shape motion-shape-6"></span></div>

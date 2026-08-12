@@ -968,83 +968,9 @@ input[type="range"] {
 }
 
 .time-app[data-theme="ink"] .main-time-text {
-  display: inline-flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 0.018em;
-  isolation: isolate;
-}
-
-.ink-time-char,
-.ink-time-mark {
-  display: inline-grid;
-  place-items: center;
-  min-width: 0.6em;
-  width: 0.6em;
-  text-align: center;
-}
-
-.ink-time-mark {
-  min-width: 0.28em;
-  width: 0.28em;
-  color: rgba(23, 32, 29, 0.62);
-  transform: translateY(-0.02em);
-}
-
-.ink-time-char {
-  position: relative;
-  color: #010101;
-  filter:
-    contrast(1.18)
-    drop-shadow(0.012em 0.018em 0 rgba(0, 0, 0, 0.14))
-    drop-shadow(0 0 0.018em rgba(18, 28, 24, 0.36));
-  transform-origin: center;
-  will-change: opacity, filter;
-}
-
-.ink-time-new,
-.ink-time-old {
-  grid-area: 1 / 1;
   display: inline-block;
-  width: 100%;
-}
-
-.ink-time-char.is-changing .ink-time-new {
-  animation: inkNewSettle 1320ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
-}
-
-.ink-time-char.is-changing .ink-time-old {
-  animation: inkOldLift 1320ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
-}
-
-.ink-time-char::before,
-.ink-time-char::after {
-  content: "";
-  position: absolute;
-  inset: 0.1em 0.06em;
-  border-radius: 46% 54% 42% 58% / 52% 38% 62% 48%;
-  background:
-    repeating-linear-gradient(112deg, rgba(244, 241, 230, 0.7) 0 0.012em, transparent 0.012em 0.05em),
-    radial-gradient(ellipse at 34% 24%, rgba(244, 241, 230, 0.58), transparent 18%),
-    radial-gradient(ellipse at 64% 62%, rgba(0, 0, 0, 0.12), transparent 38%);
-  mix-blend-mode: screen;
-  opacity: 0.22;
-  pointer-events: none;
-  will-change: opacity, transform;
-}
-
-.ink-time-char::before {
-  opacity: 0.14;
-  filter: blur(0.055em);
-}
-
-.ink-time-char::after {
-  inset: -0.02em 0.02em 0.02em;
-  background:
-    radial-gradient(ellipse at 28% 44%, rgba(244, 241, 230, 0.5), transparent 24%),
-    radial-gradient(ellipse at 58% 36%, rgba(23, 32, 29, 0.12), transparent 52%);
-  opacity: 0.07;
-  filter: blur(0.025em);
+  animation: inkWholeSettle 960ms ease-out both;
+  font-variant-numeric: tabular-nums;
 }
 
 .time-app[data-theme="ink"] .date-line,
@@ -1071,9 +997,9 @@ input[type="range"] {
   box-shadow: 0 16px 38px rgba(40, 48, 41, 0.12);
 }
 
-@keyframes inkNewSettle {
+@keyframes inkWholeSettle {
   0% {
-    opacity: 0;
+    opacity: 0.72;
     filter:
       blur(0.032em)
       contrast(0.92);
@@ -1084,22 +1010,6 @@ input[type="range"] {
     filter:
       blur(0)
       contrast(1.18);
-  }
-}
-
-@keyframes inkOldLift {
-  0% {
-    opacity: 0.92;
-    filter:
-      blur(0)
-      contrast(1.12);
-  }
-
-  100% {
-    opacity: 0;
-    filter:
-      blur(0.036em)
-      contrast(0.82);
   }
 }
 
@@ -2249,11 +2159,8 @@ input[type="range"] {
     const dots = cells.map((cell, index) => `<circle class="dotmatrix-time-dot dotmatrix-time-dot-${cell.tone}" cx="${cell.x * grid + grid / 2}" cy="${cell.y * grid + grid / 2}" r="${dotRadius}" key="${index}"></circle>`).join("");
     return `<span class="dotmatrix-time-label">${value}</span><svg class="dotmatrix-time" viewBox="0 0 ${viewport.width} ${viewport.height}" preserveAspectRatio="none" aria-hidden="true"><g style="transform:translate(${viewport.width / 2}px, ${viewport.height / 2}px) scale(${visualScale}) translate(${-viewport.width / 2}px, ${-viewport.height / 2}px);transform-box:fill-box;transform-origin:center;transition:transform 180ms ease-out">${dots}</g></svg>`;
   }
-  function inkCharHtml(char, index, previousChar = char) {
-    const changed = previousChar !== char && char !== ":";
-    return char === ":"
-      ? `<span class="ink-time-mark" data-char="${char}" aria-hidden="true">${char}</span>`
-      : `<span class="ink-time-char ${changed ? "is-changing" : ""}" data-char="${char}" aria-hidden="true">${changed ? `<span class="ink-time-old">${previousChar}</span>` : ""}<span class="ink-time-new">${char}</span></span>`;
+  function inkTimeHtml(value) {
+    return `<span class="main-time-text ink-time-text">${value}</span>`;
   }
   function parseCustomDuration() {
     const hours = Math.max(0, parseInt(customDuration.hours, 10) || 0);
@@ -2377,22 +2284,12 @@ input[type="range"] {
     $(".main-time").classList.toggle("main-time-dotmatrix", theme === "dotmatrix");
     const mainTimeElement = $(".main-time");
     if (theme === "ink") {
-      let inkText = mainTimeElement.querySelector(".ink-time-text");
-      const chars = Array.from(mainTime);
-      if (!inkText || inkText.children.length !== chars.length) {
-        mainTimeElement.innerHTML = `<span class="main-time-text ink-time-text" aria-label="${mainTime}">${chars.map(inkCharHtml).join("")}</span>`;
-        inkText = mainTimeElement.querySelector(".ink-time-text");
-      } else {
-        inkText.setAttribute("aria-label", mainTime);
-        chars.forEach((char, index) => {
-          const child = inkText.children[index];
-          if (child?.getAttribute("data-char") !== char) {
-            child.outerHTML = inkCharHtml(char, index, child?.getAttribute("data-char") || char);
-          }
-        });
+      const nextMainTimeHtml = inkTimeHtml(mainTime);
+      if (nextMainTimeHtml !== lastMainTimeHtml) {
+        mainTimeElement.innerHTML = nextMainTimeHtml;
+        lastMainTimeHtml = nextMainTimeHtml;
       }
-      lastMainTimeValue = mainTime;
-      lastMainTimeHtml = "";
+      lastMainTimeValue = "";
     } else {
       const nextMainTimeHtml = theme === "dotmatrix" ? dotMatrixTimeHtml(mainTime) : `<span class="main-time-text">${mainTime}</span>`;
       if (nextMainTimeHtml !== lastMainTimeHtml) {

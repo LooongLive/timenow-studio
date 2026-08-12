@@ -861,13 +861,13 @@ input[type="range"] {
   text-overflow: ellipsis;
   touch-action: manipulation;
   white-space: nowrap;
-  transition: border-color 150ms ease, background 150ms ease, color 150ms ease, transform 150ms ease;
+  transition: border-color 150ms ease, background 150ms ease, color 150ms ease, box-shadow 150ms ease;
 }
 
 .theme-grid button:hover {
   border-color: color-mix(in srgb, var(--accent) 62%, var(--line));
   background: color-mix(in srgb, var(--accent) 18%, rgba(255, 255, 255, 0.12));
-  transform: translateY(-1px);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
 .theme-grid button.active {
@@ -1975,7 +1975,7 @@ input[type="range"] {
     "Asia/Bangkok": { zh: ["泰国", "曼谷"], en: ["Thailand", "Bangkok"] },
     "Europe/Rome": { zh: ["意大利", "罗马"], en: ["Italy", "Rome"] },
   };
-  const themes = [["aurora",{zh:"极光玻璃",en:"Aurora Glass"}],["graphite",{zh:"石墨钛",en:"Graphite Titanium"}],["alpine",{zh:"雪岭白",en:"Alpine White"}],["mint",{zh:"薄荷晶体",en:"Mint Crystal"}],["mono",{zh:"极简单色",en:"Minimal Mono"}],["midnight",{zh:"午夜航站",en:"Midnight Terminal"}],["pixel",{zh:"像素矩阵",en:"Pixel Matrix"}],["lcd",{zh:"方块世界",en:"Block World"}],["ink",{zh:"水墨行云",en:"Ink Wash"}]];
+  const themes = [["aurora",{zh:"极光玻璃",en:"Aurora Glass"}],["graphite",{zh:"石墨钛",en:"Graphite Titanium"}],["alpine",{zh:"雪岭白",en:"Alpine White"}],["mint",{zh:"薄荷晶体",en:"Mint Crystal"}],["mono",{zh:"极简单色",en:"Minimal Mono"}],["midnight",{zh:"午夜航站",en:"Midnight Terminal"}],["pixel",{zh:"像素矩阵",en:"Pixel Matrix"}],["lcd",{zh:"方块世界",en:"Block World"}]];
   const fonts = [
     { label: { zh: "Apple 系统", en: "Apple System" }, value: "var(--font-system)" },
     { label: { zh: "Geist Sans", en: "Geist Sans" }, value: "var(--font-geist-sans)" },
